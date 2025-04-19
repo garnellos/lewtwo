@@ -1,0 +1,15 @@
+body {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+/* list of task */
+div#task-view ul {
+    list-style-type: none;
+}
+
+/* individual task display in list */
+div#task-view .task {
+    cursor: pointer;
+    user-select: none; /* prevent text selection */
+}
