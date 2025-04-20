@@ -4,13 +4,26 @@ class Task
 {
     // fields
 
-    title;          // title, will appear in task list
-    description;    // full-sized details on this task
-    parent;         // parent task for hierarchical view
-    #creationDate;  // time of creation of task
-    startDate;      // 
-    dueDate;        // 
-    done;           // true if done, otherwise considered not done
+    /** title, will appear in task list */
+    title;
+
+    /** full-sized details on this task */
+    description;
+
+    /** parent task for hierarchy */
+    parent;
+
+    /** time of creation of task */
+    #creationDate;
+
+    /** time for work on task to be started */
+    startDate;
+
+    /** time when task is due */
+    dueDate;
+
+    /** determines if task is done */
+    done;
 
     // constructor
 
