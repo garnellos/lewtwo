@@ -3,6 +3,8 @@
     <head>
         <title>Lewtwo - Alpha Build</title>
         <link rel="stylesheet" type="text/css" href="./default.css" />
+
+        <script src="task.js"></script>
     </head>
     <body>
         <p>
@@ -13,7 +15,7 @@
             <ul>
                 <li>
                     <span class="task">Projekt</span>
-                    <ul>
+                    <!--<ul>
                         <li><span class="task">Aufgabe 1</span></li>
                         <li>
                             <span class="task">Aufgabe 2</span>
@@ -23,9 +25,22 @@
                             </ul>
                         </li>
                         <li><span class="task">Aufgabe 3</span></li>
-                    </ul>
+                    </ul>-->
+                </li>
+                <li>
+                    <input id="new" type="text" placeholder="Neue Aufgabe..." />
+                    <input id="new-create" type="button" value="OK" />
                 </li>
             </ul>
         </div>
     </body>
+    <script type="text/javascript">
+        let btnNewTask = document.getElementById("new-create");
+        
+        tasks = [new Task("Projekt", null, null, Date.now(), null, false)];
+
+        btnNewTask.onclick = function() {
+            alert("You clicked! New Task: " + document.getElementById("new").value);
+        };
+    </script>
 </html>
