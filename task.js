@@ -1,5 +1,3 @@
-"use strict";
-
 class Task
 {
     // fields
@@ -25,12 +23,20 @@ class Task
     /** determines if task is done */
     done;
 
+
     // constructor
 
-    constructor()
+    constructor(title, description, parent, creationDate, startDate, dueDate, done)
     {
-        
+        this.title = title;
+        this.description = description;
+        this.parent = parent;
+        this.#creationDate = creationDate;
+        this.startDate = startDate;
+        this.dueDate = dueDate;
+        this.done = done;
     }
+
 
     // getters
 
@@ -38,6 +44,7 @@ class Task
     {
         return this.#creationDate;
     }
+
 
     // methods
     
