@@ -14,9 +14,6 @@ class Task
     /** time of creation of task */
     #creationDate;
 
-    /** time for work on task to be started */
-    startDate;
-
     /** time when task is due */
     dueDate;
 
@@ -26,13 +23,12 @@ class Task
 
     // constructor
 
-    constructor(title, description, parent, creationDate, startDate, dueDate, done)
+    constructor(title, description, parent, creationDate, dueDate, done)
     {
         this.title = title;
         this.description = description;
         this.parent = parent;
         this.#creationDate = creationDate;
-        this.startDate = startDate;
         this.dueDate = dueDate;
         this.done = done;
     }
