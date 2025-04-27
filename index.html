@@ -7,32 +7,42 @@
         <script src="task.js"></script>
     </head>
     <body>
-        <p>
+        <header>
             <b>Lightweight task and work organizer</b> Alpha v0.1<br />
-        </p>
-        <!-- nur ein Muster, um das Grundprinzip zu konstruieren -->
-        <div id="task-view">
-            <ul>
-                <li>
-                    <span class="task">Projekt</span>
-                    <!--<ul>
-                        <li><span class="task">Aufgabe 1</span></li>
-                        <li>
-                            <span class="task">Aufgabe 2</span>
-                            <ul>
-                                <li><span class="task">Unteraufgabe 1</span></li>
-                                <li><span class="task">Unteraufgabe 2</span></li>
-                            </ul>
-                        </li>
-                        <li><span class="task">Aufgabe 3</span></li>
-                    </ul>-->
-                </li>
-                <li>
-                    <input id="new" type="text" placeholder="Neue Aufgabe..." />
-                    <input id="new-create" type="button" value="OK" />
-                </li>
-            </ul>
-        </div>
+        </header>
+        <nav>
+            <i>Navigation view</i>
+        </nav>
+        <main>
+            <div id="task-view">
+                <ul>
+                    <li>
+                        <span class="task">Projekt</span>
+                        <!--<ul>
+                            <li><span class="task">Aufgabe 1</span></li>
+                            <li>
+                                <span class="task">Aufgabe 2</span>
+                                <ul>
+                                    <li><span class="task">Unteraufgabe 1</span></li>
+                                    <li><span class="task">Unteraufgabe 2</span></li>
+                                </ul>
+                            </li>
+                            <li><span class="task">Aufgabe 3</span></li>
+                        </ul>-->
+                    </li>
+                    <li>
+                        <input id="new" type="text" placeholder="Neue Aufgabe..." />
+                        <input id="new-create" type="button" value="OK" />
+                    </li>
+                </ul>
+            </div>
+        </main>
+        <aside>
+            <i>Detail view</i>
+        </aside>
+        <footer>
+            <i>Footer</i>
+        </footer>
     </body>
     <script type="text/javascript">
         let btnNewTask = document.getElementById("new-create");

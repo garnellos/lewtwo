@@ -1,6 +1,18 @@
 body {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: grid;
+    gap: .5em;
+}
 
+@media (min-width: 45em) {
+    body {
+        grid-template-columns: 1fr 3fr 1fr;
+        grid-template-rows: auto 1fr min-content;
+    }
+}
+
+header, footer {
+    grid-column: 1 / -1;
 }
 
 /* list of task */
