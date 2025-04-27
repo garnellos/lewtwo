@@ -172,7 +172,7 @@ class TaskList
                 input.setAttribute("id", "new-create");
                 input.setAttribute("type", "button");
                 input.setAttribute("value", "OK");
-                input.onclick = handler;
+                input.addEventListener("click", handler);
                 return input;
             })());
             return li;
