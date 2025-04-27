@@ -47,7 +47,8 @@
     <script type="text/javascript">
         let btnNewTask = document.getElementById("new-create");
         
-        tasks = [new Task("Projekt", null, null, Date.now(), null, false)];
+        tasks = new TaskList();
+        tasks.addTask(new Task("Projekt", null, null, Date.now(), null, false));
 
         btnNewTask.onclick = function() {
             alert("You clicked! New Task: " + document.getElementById("new").value);

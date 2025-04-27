@@ -46,7 +46,7 @@ class Task
         this.parent = parent;
         if (parent != null) parent.addChild(this); // add to parents' list if no top-level task
         
-        this.children = [];
+        this.#children = [];
         this.#creationDate = creationDate;
         this.dueDate = dueDate;
         this.done = done;
@@ -91,33 +91,14 @@ class TaskList
     // fields
 
     /** array of top-level tasks */
-    #tasks;
+    tasks;
 
 
     // constructor
 
     constructor()
     {
-        this.#tasks = [];
-    }
-
-    constructor(list)
-    {
-        if (list instanceof TaskList) {
-            this.#tasks = list.getTasks();
-        } else if (list instanceof Array) {
-            this.#tasks = list;
-        } else {
-            throw new Error("Invalid parameter for TaskList constructor.")
-        }
-    }
-
-
-    // getters
-
-    get tasks()
-    {
-        return this.#tasks;
+        this.tasks = [];
     }
 
 
@@ -127,7 +108,7 @@ class TaskList
     addTask(t)
     {
         if (t instanceof Task)
-            this.#tasks.push(t);
+            this.tasks.push(t);
         else
             throw new Error("Parameter is not a Task object.");
     }
