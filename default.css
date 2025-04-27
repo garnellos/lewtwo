@@ -1,3 +1,5 @@
+/** PAGE LAYOUT */
+
 body {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: grid;
@@ -15,13 +17,16 @@ header, footer {
     grid-column: 1 / -1;
 }
 
+
+/** TASK DISPLAY SETTINGS */
+
 /* list of task */
-div#task-view ul {
+div#task-list-view ul {
     list-style-type: none;
 }
 
-/* individual task display in list */
-div#task-view .task {
+/* individual task name/handle display in list */
+div#task-list-view .task-handle {
     cursor: pointer;
     user-select: none; /* prevent text selection */
 }

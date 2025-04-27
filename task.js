@@ -112,4 +112,23 @@ class TaskList
         else
             throw new Error("Parameter is not a Task object.");
     }
+
+    /** Returns DOM nodes for a HTML view of the task list. */
+    render()
+    {
+        let taskListView = document.querySelector("#task-list-view");
+        let ul = document.createElement("ul");
+        taskListView.innerHTML = "";
+
+        for (let t of this.tasks) {
+            let li = document.createElement("li");
+            let span = document.createElement("span");
+            span.classList.add("task-handle");
+            span.textContent = t.title;
+            li.appendChild(span);
+            ul.appendChild(li);
+        }
+
+        taskListView.appendChild(ul);
+    }
 }
