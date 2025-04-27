@@ -1,3 +1,6 @@
+/**
+ * Represents a task as a core piece of logic in the lewtwo app.
+ */
 class Task
 {
     // fields
@@ -64,6 +67,7 @@ class Task
         return this.#children;
     }
 
+
     // methods
     
     /** Adds a child task. */
@@ -79,10 +83,52 @@ class Task
     }
 }
 
+/**
+ * Represents a list of top-level tasks, i.e. instances of the Task class.
+ */
 class TaskList
 {
     // fields
 
     /** array of top-level tasks */
     #tasks;
+
+
+    // constructor
+
+    constructor()
+    {
+        this.#tasks = [];
+    }
+
+    constructor(list)
+    {
+        if (list instanceof TaskList) {
+            this.#tasks = list.getTasks();
+        } else if (list instanceof Array) {
+            this.#tasks = list;
+        } else {
+            throw new Error("Invalid parameter for TaskList constructor.")
+        }
+    }
+
+
+    // getters
+
+    get tasks()
+    {
+        return this.#tasks;
+    }
+
+
+    // methods
+
+    /** Adds a task to the list. */
+    addTask(t)
+    {
+        if (t instanceof Task)
+            this.#tasks.push(t);
+        else
+            throw new Error("Parameter is not a Task object.");
+    }
 }
