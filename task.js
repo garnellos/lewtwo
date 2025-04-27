@@ -116,10 +116,14 @@ class TaskList
     /** Returns DOM nodes for a HTML view of the task list. */
     render()
     {
+        // select viewport
         let taskListView = document.querySelector("#task-list-view");
+
+        // select and clear ul
         let ul = document.createElement("ul");
         taskListView.innerHTML = "";
 
+        // for every task, create a list item
         for (let t of this.tasks) {
             let li = document.createElement("li");
             let span = document.createElement("span");
@@ -129,6 +133,32 @@ class TaskList
             ul.appendChild(li);
         }
 
+        // add buttons for adding additional tasks...
+        ul.appendChild((() => {
+            let li = document.createElement("li");
+            li.appendChild((() => {
+                let input = document.createElement("input");
+                input.setAttribute("id", "new");
+                input.setAttribute("type", "text");
+                input.setAttribute("placeholder", "Neue Aufgabe...");
+                return input;
+            })());
+            li.appendChild((() => {
+                let input = document.createElement("input");
+                input.setAttribute("id", "new-create");
+                input.setAttribute("type", "button");
+                input.setAttribute("value", "OK");
+                input.onclick = function() {
+                    let newTaskName = document.querySelector("#new").value;
+                    alert("You clicked! New Task: " + newTaskName);
+                    tasks.addTask(new Task(newTaskName, null, null, Date.now(), null, false));
+                };
+                return input;
+            })());
+            return li;
+        })());
+
+        // add task list to view
         taskListView.appendChild(ul);
     }
 }
