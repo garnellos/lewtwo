@@ -73,13 +73,17 @@ class Task
     /** Adds a child task. */
     addChild(t)
     {
-        this.#children.push(t);
+        if (t instanceof Task) {
+            this.#children.push(t);
+        } else {
+            throw new Error("argument is not an instance of task");
+        }
     }
 
     /** Marks a task as done. */
-    done()
+    markAsDone()
     {
-        done = true;
+        this.done = true;
     }
 }
 
@@ -143,7 +147,7 @@ class TaskList
                         document.querySelector("#new-task-name").value, // title
                         null,       // description
                         null,       // parent
-                        Date.now(), // creationDate
+                        new Date(), // creationDate
                         null,       // dueDate
                         false));    // done
                 tasks.render();
