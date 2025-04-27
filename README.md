@@ -9,11 +9,8 @@ Thank you, please enjoy using lewtwo!
 ## Principles
 lewtwos core design principles are:
 
-### Be easy to use
-No logging in, no signing up, as little boilerplate as possible, just be easy and intuitive to pick up and start using.
+**Be accessible**: No logging in, no signing up, as little boilerplate as possible, just be easy and intuitive to pick up and start using.
 
-### Save any data locally
-All data that is processed through lewtwo is saved locally through IndexedDB and not uploaded to any cloud, server or SAAS provider. Local export to a JSON file is possible for backups and exchange.
+**Save any data locally**: All data that is processed through lewtwo is saved locally through IndexedDB and not uploaded to any cloud, server or SAAS provider. Local export to a JSON file is possible for backups and exchange.
 
-### Divide and conquer
-Any task can split up into an infinite number of subtasks, and so on. You don't have to stick to any categories given by software &ndash; just build any hierarchy that suits you and your workflow.
+**Divide and conquer**: Any task can split up into an infinite number of subtasks, and so on. You don't have to stick to any categories given by software &ndash; just build any hierarchy that suits you and your workflow.

@@ -136,11 +136,31 @@ class TaskList
         // add buttons for adding additional tasks...
         ul.appendChild((() => {
             let li = document.createElement("li");
+
+            let handler = function() {
+                tasks.addTask(
+                    new Task(
+                        document.querySelector("#new-task-name").value, // title
+                        null,       // description
+                        null,       // parent
+                        Date.now(), // creationDate
+                        null,       // dueDate
+                        false));    // done
+                tasks.render();
+            }
+
             li.appendChild((() => {
                 let input = document.createElement("input");
-                input.setAttribute("id", "new");
+                input.setAttribute("id", "new-task-name");
                 input.setAttribute("type", "text");
                 input.setAttribute("placeholder", "Neue Aufgabe...");
+                input.addEventListener("keypress", function(event) {
+                    if (event.key === "Enter") {
+                        event.preventDefault();
+                        handler();
+                        document.querySelector("#new-task-name").focus();
+                    }
+                })
                 return input;
             })());
             li.appendChild((() => {
@@ -148,11 +168,7 @@ class TaskList
                 input.setAttribute("id", "new-create");
                 input.setAttribute("type", "button");
                 input.setAttribute("value", "OK");
-                input.onclick = function() {
-                    let newTaskName = document.querySelector("#new").value;
-                    alert("You clicked! New Task: " + newTaskName);
-                    tasks.addTask(new Task(newTaskName, null, null, Date.now(), null, false));
-                };
+                input.onclick = handler;
                 return input;
             })());
             return li;

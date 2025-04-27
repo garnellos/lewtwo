@@ -15,10 +15,10 @@
         </nav>
         <main>
             <div id="task-list-view">
-                <ul>
+                <ul><!--
                     <li>
                         <span class="task-handle">Projekt</span>
-                        <!--<ul>
+                        <ul>
                             <li><span class="task">Aufgabe 1</span></li>
                             <li>
                                 <span class="task">Aufgabe 2</span>
@@ -28,12 +28,12 @@
                                 </ul>
                             </li>
                             <li><span class="task">Aufgabe 3</span></li>
-                        </ul>-->
+                        </ul>
                     </li>
                     <li>
                         <input id="new" type="text" placeholder="Neue Aufgabe..." />
                         <input id="new-create" type="button" value="OK" />
-                    </li>
+                    </li>-->
                 </ul>
             </div>
         </main>
@@ -45,15 +45,8 @@
         </footer>
     </body>
     <script type="text/javascript">
-        var btnNewTask = document.getElementById("new-create");
-        
         tasks = new TaskList();
         tasks.addTask(new Task("Projekt", null, null, Date.now(), null, false));
-
-        btnNewTask.onclick = function() {
-            let newTaskName = document.querySelector("#new").value;
-            alert("You clicked! New Task: " + newTaskName);
-            tasks.addTask(new Task(newTaskName, null, null, Date.now(), null, false));
-        };
+        tasks.render();
     </script>
 </html>
