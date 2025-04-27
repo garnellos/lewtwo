@@ -30,3 +30,7 @@ div#task-list-view .task-handle {
     cursor: pointer;
     user-select: none; /* prevent text selection */
 }
+
+div#task-list-view #new-task-name {
+    margin-right: .5em;
+}

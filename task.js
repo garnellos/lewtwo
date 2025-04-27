@@ -142,9 +142,12 @@ class TaskList
             let li = document.createElement("li");
 
             let handler = function() {
+                let taskTitle = document.querySelector("#new-task-name").value
+                if (taskTitle == "") return;
+
                 tasks.addTask(
                     new Task(
-                        document.querySelector("#new-task-name").value, // title
+                        taskTitle, // title
                         null,       // description
                         null,       // parent
                         new Date(), // creationDate
@@ -157,7 +160,7 @@ class TaskList
                 let input = document.createElement("input");
                 input.setAttribute("id", "new-task-name");
                 input.setAttribute("type", "text");
-                input.setAttribute("placeholder", "Neue Aufgabe...");
+                input.setAttribute("placeholder", "New task...");
                 input.addEventListener("keypress", function(event) {
                     if (event.key === "Enter") {
                         event.preventDefault();
