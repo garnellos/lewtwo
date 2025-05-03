@@ -21,16 +21,16 @@ header, footer {
 /** TASK DISPLAY SETTINGS */
 
 /* list of task */
-div#task-list-view ul {
+div#panel-task-list ul {
     list-style-type: none;
 }
 
 /* individual task name/handle display in list */
-div#task-list-view .task-handle {
+div#panel-task-list .task-handle {
     cursor: pointer;
     user-select: none; /* prevent text selection */
 }
 
-div#task-list-view #new-task-name {
+div#panel-task-list #new-task-name {
     margin-right: .5em;
 }

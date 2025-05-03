@@ -5,6 +5,9 @@ class Task
 {
     // fields
 
+    /** unique ID of the task */
+    uuid;
+
     /** title, will appear in task list */
     title;
 
@@ -40,6 +43,7 @@ class Task
      */
     constructor(title, description, parent, creationDate, dueDate, done)
     {
+        this.uuid = crypto.randomUUID();
         this.title = title;
         this.description = description;
 
@@ -117,11 +121,11 @@ class TaskList
             throw new Error("Parameter is not a Task object.");
     }
 
-    /** Returns DOM nodes for a HTML view of the task list. */
+    /** Returns DOM nodes for an HTML view of the task list. */
     render()
     {
         // select viewport
-        let taskListView = document.querySelector("#task-list-view");
+        let taskListView = document.querySelector("#panel-task-list");
 
         // select and clear ul
         let ul = document.createElement("ul");
@@ -132,6 +136,7 @@ class TaskList
             let li = document.createElement("li");
             let span = document.createElement("span");
             span.classList.add("task-handle");
+            span.dataset.taskId = t.uuid;
             span.textContent = t.title;
             li.appendChild(span);
             ul.appendChild(li);
@@ -141,9 +146,17 @@ class TaskList
         ul.appendChild((() => {
             let li = document.createElement("li");
 
+            /**
+             * Handles the creation of a new task and updates the task list.
+             *
+             * This function retrieves the task title from the input field with the ID "new-task-name".
+             * If the input is empty, the function terminates without taking any action.
+             * Otherwise, it creates a new `Task` instance with the given title and other properties set to default values.
+             * The new task is added to the task list, and the updated task list is rendered.
+             */
             let handler = function() {
                 let taskTitle = document.querySelector("#new-task-name").value
-                if (taskTitle == "") return;
+                if (taskTitle === "") return;
 
                 tasks.addTask(
                     new Task(
@@ -167,7 +180,7 @@ class TaskList
                         handler();
                         document.querySelector("#new-task-name").focus();
                     }
-                })
+                });
                 return input;
             })());
             li.appendChild((() => {
@@ -183,5 +196,42 @@ class TaskList
 
         // add task list to view
         taskListView.appendChild(ul);
+    }
+
+    /**
+     * Searches for a task within the task hierarchy by its unique identifier (UUID) using a depth-first search (DFS)
+     * algorithm.
+     *
+     * @param {string} uuid - The unique identifier of the task to search for.
+     * @return {Object|null} The task object &ndash; or, if no matching task is found, `null`.
+     */
+    search(uuid)
+    {
+        const dfs = function(task, uuid) {
+            if (task.uuid === uuid) return task;
+            for (let t of task.children) {
+                const s = dfs(t, uuid);
+                if (s) return s;
+            }
+            return null;
+        }
+
+        for (let t of this.tasks) {
+            let r = dfs(t, uuid);
+            if (r != null) return r;
+        }
+    }
+
+    /**
+     *
+     * @param {Task} t Task to be focused.
+     */
+    focus(t)
+    {
+        if (!(t instanceof Task)) { // control if t is a Task object
+            return;
+        }
+
+
     }
 }
