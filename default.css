@@ -30,6 +30,7 @@ div#panel-task-list ul {
 
 /* individual task name/handle display in list */
 div#panel-task-list .task-handle {
+    margin-left: .25em;
     cursor: pointer;
     user-select: none; /* prevent text selection */
 }

@@ -148,6 +148,7 @@ class TaskList
 
             let check = document.createElement("input");
             check.setAttribute("type", "checkbox");
+            check.classList.add("task-handle-checkbox");
             check.checked = t.done;
             check.addEventListener("change", function() {
                 t.done = !t.done;
@@ -186,18 +187,20 @@ class TaskList
              * The new task is added to the task list, and the updated task list is rendered.
              */
             let handler = function() {
-                let taskTitle = document.querySelector("#new-task-name").value
+                let taskTitle = document.querySelector("#new-task-name").value;
                 if (taskTitle === "") return;
 
-                tasks.addTask(
-                    new Task(
-                        taskTitle, // title
-                        null,       // description
-                        null,       // parent
-                        new Date(), // creationDate
-                        null,       // dueDate
-                        false));    // done
+                let n = new Task(
+                        taskTitle,
+                        "",
+                        null,
+                        new Date(),
+                        null,
+                        false
+                );
+                tasks.addTask(n);
                 tasks.render();
+                tasks.focus(n);
             }
 
             li.appendChild((() => {
@@ -224,6 +227,7 @@ class TaskList
             return li;
         })());
 
+        // If there's an active task, mark its DOM element as selected to highlight it in the UI
         if (this.activeTask)
             this.activeTask.domElement.dataset.selected = true;
 
@@ -263,8 +267,11 @@ class TaskList
     }
 
     /**
+     * Sets the specified Task object as the active task and updates its visual representation
+     * and the detail view accordingly.
      *
-     * @param {Task} t Task to be focused.
+     * @param {Task} t - The task to be focused. Must be an instance of the Task class.
+     * @throws {Error} Throws an error if the provided argument is not an instance of the Task class.
      */
     focus(t)
     {
@@ -278,11 +285,34 @@ class TaskList
         this.#updateDetailView();
     }
 
+    /**
+     * Removes focus from the currently active task, if any.
+     */
+    unfocus()
+    {
+        if (this.activeTask) this.activeTask.domElement.dataset.selected = "false";
+        this.activeTask = null;
+
+        this.#updateDetailView();
+    }
+
     #updateDetailView() {
+        /**
+         * Formats a given date into a localized string representation.
+         *
+         * The formatted date includes the day, month, and year in "DD.MM.YYYY" format,
+         * followed by the time in "HH:MM" format based on the German locale.
+         * If the input is not a Date object, it attempts to convert the input into a valid Date instance.
+         * If the input is invalid or undefined, the function returns a placeholder "-".
+         *
+         * @param {Date|string|number} date - The date to be formatted. Can be a Date object,
+         * a date string, or a timestamp. If not a valid Date representation, it defaults to "-".
+         * @returns {string} The formatted date string or "-" if the input is invalid.
+         */
         let formatDateTime = function(date) {
             if (!date) return "-";
             if (!(date instanceof Date)) date = new Date(date);
-            // z.B. 29.05.2024, 19:12
+            // e.g. 29.05.2024, 19:12
             return date.toLocaleDateString("de-DE", {
                 day: "2-digit",
                 month: "2-digit",
@@ -293,29 +323,40 @@ class TaskList
             });
         };
 
+        // get the currently active task from the TaskList instance for updating the detail view
         let t = this.activeTask;
+
+        // if no task selected, show the default panel and return
+        if (!t) {
+            document.querySelector("#panel-task-details").style.display = "none";
+            document.querySelector("#panel-no-task-selected").style.display = "block";
+            return;
+        }
 
         // show task detail panel and hide "no task selected" panel
         document.querySelector("#panel-no-task-selected").style.display = "none";
         document.querySelector("#panel-task-details").style.display = "block";
 
         // alter detail panel to contain selected task details
+        document.querySelector("#active-task-creation-date").textContent = formatDateTime(t.creationDate);
+        document.querySelector("#active-task-uuid").textContent = t.uuid;
+
+        // get elements that require event handling
         let titleElement        = document.querySelector("#active-task-title");
         let descriptionElement  = document.querySelector("#active-task-description");
         let dueDateElement      = document.querySelector("#active-task-due-date");
         let doneElement         = document.querySelector("#active-task-done");
-        document.querySelector("#active-task-creation-date").textContent = formatDateTime(t.creationDate);
-        document.querySelector("#active-task-uuid").textContent = t.uuid;
 
+        // set text content to task details as provided
         titleElement.textContent = t.title;
         descriptionElement.textContent = t.description;
         dueDateElement.textContent = formatDateTime(t.dueDate);
         doneElement.checked = t.done;
 
+        // add event listeners
         doneElement.addEventListener("change", function() {
             t.done = !t.done;
             window.liveTaskList.render();
         });
     }
 }
-

@@ -70,5 +70,13 @@
     <script type="text/javascript">
         tasks = new TaskList();
         tasks.render();
+
+        document.querySelector("main").addEventListener("click", (e) => {
+            // check if the clicked element is a task handle
+            if (!e.target.closest('.task-handle') && !e.target.closest('.task-handle-checkbox')) {
+                window.liveTaskList.unfocus();
+            }
+            // if not: no unfocus
+        });
     </script>
 </html>
