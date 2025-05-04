@@ -4,6 +4,7 @@ body {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: grid;
     gap: .5em;
+    color: black;
 }
 
 @media (min-width: 45em) {
@@ -16,6 +17,8 @@ body {
 header, footer {
     grid-column: 1 / -1;
 }
+
+button { border-radius: 1em; }
 
 
 /** TASK LIST DISPLAY SETTINGS */
@@ -31,21 +34,31 @@ div#panel-task-list .task-handle {
     user-select: none; /* prevent text selection */
 }
 
+div#panel-task-list .task-handle[data-selected="true"] {
+    color: white;
+    background-color: black;
+}
+
 div#panel-task-list #new-task-name {
     margin-right: .5em;
 }
 
 /** TASK DETAIL VIEW DISPLAY SETTINGS */
-div#panel-detail #active-task-title {
+#panel-detail #active-task-title {
     font-weight: bold;
     font-size: 125%;
 }
 
-div#panel-detail #active-task-due-date {
-
+#panel-detail #active-task-due-date-wrapper {
+    font-style: italic;
+    color: darkgray;
 }
 
-div#panel-detail #active-task-uuid {
+#panel-detail #active-task-due-date {
+    color: black;
+}
+
+#panel-detail #active-task-uuid, #panel-detail #active-task-creation-date {
     margin-top: .5em;
     font-style: italic;
     font-size: 70%;

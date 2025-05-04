@@ -42,19 +42,22 @@
                 <b>No task selected.</b> Please select any task to show details.
             </div>
             <div id="panel-detail">
-                <div>
+                <div id="active-task-title-wrapper">
                     <input type="checkbox" id="active-task-done" title="Mark this task as (not) done" />
                     <span id="active-task-title">Title</span>
                 </div>
-                <div>
-                    Due by
+                <div id="active-task-due-date-wrapper">
+                    due by
                     <span id="active-task-due-date">05.05.2025 17:00</span>
                 </div>
                 <div id="active-task-description">Long Description.</div>
                 <hr />
-                <button>Add child</button>
-                <button>Select parent</button>
-                <button>Remove</button>
+                <div id="active-task-button-wrapper">
+                    <button id="active-task-button-add-child">Add child</button>
+                    <button id="active-task-button-select-parent">Select parent</button>
+                    <button id="active-task-button-remove">Remove</button>
+                </div>
+                <div id="active-task-creation-date">created on 04.05.2025 17:45</div>
                 <div id="active-task-uuid">####-####-######-######-####-####</div>
             </div>
         </aside>

@@ -29,6 +29,10 @@ class Task
     /** determines if task is done */
     done;
 
+    /** @type HTMLElement
+     * The DOM Element of this task, if it is already rendered. */
+    domElement;
+
 
     // constructor
 
@@ -98,8 +102,17 @@ class TaskList
 {
     // fields
 
-    /** array of top-level tasks */
+    /**
+     * array of top-level tasks
+     * @type Task[]
+     */
     tasks;
+
+    /**
+     * currently selected task
+     * @type Task | null
+     */
+    activeTask = null;
 
 
     // constructor
@@ -107,6 +120,10 @@ class TaskList
     constructor()
     {
         this.tasks = [];
+        /**
+         * The currently active `TaskList` instance that manages the tasks that are on screen.
+         */
+        window.liveTaskList = this;
     }
 
 
@@ -137,7 +154,15 @@ class TaskList
             let span = document.createElement("span");
             span.classList.add("task-handle");
             span.dataset.taskId = t.uuid;
+            span.dataset.selected = "false";
             span.textContent = t.title;
+            span.addEventListener("click", (e) => {
+                let l = window.liveTaskList;
+                l.focus(l.search(e.currentTarget.dataset.taskId));
+            });
+
+            t.domElement = span;
+
             li.appendChild(span);
             ul.appendChild(li);
         }
@@ -184,15 +209,17 @@ class TaskList
                 return input;
             })());
             li.appendChild((() => {
-                let input = document.createElement("input");
+                let input = document.createElement("button");
                 input.setAttribute("id", "new-create");
-                input.setAttribute("type", "button");
-                input.setAttribute("value", "OK");
+                input.textContent = "OK";
                 input.addEventListener("click", handler);
                 return input;
             })());
             return li;
         })());
+
+        if (this.activeTask)
+            this.activeTask.domElement.dataset.selected = true;
 
         // add task list to view
         taskListView.appendChild(ul);
@@ -203,7 +230,7 @@ class TaskList
      * algorithm.
      *
      * @param {string} uuid - The unique identifier of the task to search for.
-     * @return {Object|null} The task object &ndash; or, if no matching task is found, `null`.
+     * @return {Task|null} The task object &ndash; or, if no matching task is found, `null`.
      */
     search(uuid)
     {
@@ -238,6 +265,12 @@ class TaskList
         if (!(t instanceof Task)) // control if t is a Task object
             throw new Error("Argument t must be a Task object");
 
+        // debug log
+        console.log("Focusing task \"" + t.uuid + "\"");
+
+        if (this.activeTask) this.activeTask.domElement.dataset.selected = "false";
+        this.activeTask = t;
+        t.domElement.dataset.selected = "true";
 
     }
 }
