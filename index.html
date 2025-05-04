@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>Lewtwo - Alpha Build</title>
         <link rel="stylesheet" type="text/css" href="./default.css" />
@@ -41,7 +41,7 @@
             <div id="panel-no-task-selected" style="display: none;">
                 <b>No task selected.</b> Please select any task to show details.
             </div>
-            <div id="panel-detail">
+            <div id="panel-task-details">
                 <div id="active-task-title-wrapper">
                     <input type="checkbox" id="active-task-done" title="Mark this task as (not) done" />
                     <span id="active-task-title">Title</span>
@@ -57,7 +57,9 @@
                     <button id="active-task-button-select-parent">Select parent</button>
                     <button id="active-task-button-remove">Remove</button>
                 </div>
-                <div id="active-task-creation-date">created on 04.05.2025 17:45</div>
+                <div id="active-task-creation-date-wrapper">
+                    created on <span id="active-task-creation-date">04.05.2025 17:45</span>
+                </div>
                 <div id="active-task-uuid">####-####-######-######-####-####</div>
             </div>
         </aside>

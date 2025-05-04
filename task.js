@@ -272,5 +272,27 @@ class TaskList
         this.activeTask = t;
         t.domElement.dataset.selected = "true";
 
+        let formatDateTime = function(date) {
+            if (!date) return "-";
+            if (!(date instanceof Date)) date = new Date(date);
+            // z.B. 29.05.2024, 19:12
+            return date.toLocaleDateString("de-DE", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric"
+            }) + " " + date.toLocaleTimeString("de-DE", {
+                hour: "2-digit",
+                minute: "2-digit"
+            });
+        };
+
+        // alter detail panel to contain selected task details
+        document.querySelector("#active-task-title").textContent = t.title;
+        document.querySelector("#active-task-description").textContent = t.description;
+        document.querySelector("#active-task-due-date").textContent = formatDateTime(t.dueDate);
+        document.querySelector("#active-task-done").checked = t.done;
+        document.querySelector("#active-task-creation-date").textContent = formatDateTime(t.creationDate);
+        document.querySelector("#active-task-uuid").textContent = t.uuid;
     }
 }
+

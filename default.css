@@ -44,23 +44,27 @@ div#panel-task-list #new-task-name {
 }
 
 /** TASK DETAIL VIEW DISPLAY SETTINGS */
-#panel-detail #active-task-title {
+#panel-task-details #active-task-title {
     font-weight: bold;
     font-size: 125%;
 }
 
-#panel-detail #active-task-due-date-wrapper {
+#panel-task-details #active-task-due-date-wrapper {
     font-style: italic;
     color: darkgray;
 }
 
-#panel-detail #active-task-due-date {
+#panel-task-details #active-task-due-date {
     color: black;
 }
 
-#panel-detail #active-task-uuid, #panel-detail #active-task-creation-date {
+#panel-task-details #active-task-uuid, #panel-task-details #active-task-creation-date-wrapper {
     margin-top: .5em;
     font-style: italic;
     font-size: 70%;
     color: darkgray;
+}
+
+#panel-task-details #active-task-uuid {
+    font-family: monospace;
 }
