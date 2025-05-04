@@ -8,7 +8,7 @@ class Task
     /** unique ID of the task */
     uuid;
 
-    /** title, will appear in task list */
+    /** title of the task as it will appear in the task list */
     title;
 
     /** full-sized details on this task */
@@ -20,7 +20,7 @@ class Task
     /** child tasks for hierarchy */
     #children;
 
-    /** time of creation of task */
+    /** time at which task was created */
     #creationDate;
 
     /** time when task is due */
@@ -40,13 +40,20 @@ class Task
      * Constructs a new task object with all necessary attributes.
      * @param {string} title title of the task as to be displayed in task list
      * @param {string} description full-sized details on this task
-     * @param {Task} parent parent task, this task will automatically be added to its parents child list. for a top-level task, pass null.
+     * @param {Task} parent parent task, this task will automatically be added to its parents child list.
+     * for a top-level task, pass null.
      * @param {Date} creationDate time of creation of task
      * @param {Date} dueDate time when task is due
      * @param {boolean} done determines if task is done
      */
-    constructor(title, description, parent, creationDate, dueDate, done)
-    {
+    constructor(
+        title,
+        description,
+        parent,
+        creationDate,
+        dueDate,
+        done
+    ) {
         this.uuid = crypto.randomUUID();
         this.title = title;
         this.description = description;
@@ -153,7 +160,7 @@ class TaskList
             check.addEventListener("change", function() {
                 t.done = !t.done;
                 window.liveTaskList.render();
-                window.liveTaskList.#updateDetailView();
+                window.liveTaskList.updateDetailView();
             });
             li.appendChild(check);
 
@@ -229,7 +236,7 @@ class TaskList
 
         // If there's an active task, mark its DOM element as selected to highlight it in the UI
         if (this.activeTask)
-            this.activeTask.domElement.dataset.selected = true;
+            this.activeTask.domElement.dataset.selected = "true";
 
         // add task list to view
         taskListView.appendChild(ul);
@@ -282,7 +289,7 @@ class TaskList
         this.activeTask = t;
         t.domElement.dataset.selected = "true";
 
-        this.#updateDetailView();
+        this.updateDetailView();
     }
 
     /**
@@ -293,12 +300,12 @@ class TaskList
         if (this.activeTask) this.activeTask.domElement.dataset.selected = "false";
         this.activeTask = null;
 
-        this.#updateDetailView();
+        this.updateDetailView();
     }
 
-    #updateDetailView() {
+    updateDetailView() {
         /**
-         * Formats a given date into a localized string representation.
+         * Formats a given date into a localised string representation.
          *
          * The formatted date includes the day, month, and year in "DD.MM.YYYY" format,
          * followed by the time in "HH:MM" format based on the German locale.
@@ -349,14 +356,26 @@ class TaskList
 
         // set text content to task details as provided
         titleElement.textContent = t.title;
-        descriptionElement.textContent = t.description;
+        descriptionElement.innerHTML = t.description || "<i>no description</i>";
         dueDateElement.textContent = formatDateTime(t.dueDate);
         doneElement.checked = t.done;
 
         // add event listeners
-        doneElement.addEventListener("change", function() {
+        doneElement.onchange = function() {
             t.done = !t.done;
             window.liveTaskList.render();
-        });
+        };
+        /*
+        titleElement.onclick = function() {
+            t.title = prompt("Enter new title: ", t.title) || t.title;
+            window.liveTaskList.render();
+            window.liveTaskList.updateDetailView();
+        }
+
+        descriptionElement.onclick = function() {
+            t.description = prompt("Enter new description: ", t.description);
+            window.liveTaskList.updateDetailView();
+        };
+        */
     }
 }
