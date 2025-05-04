@@ -207,19 +207,26 @@ class TaskList
      */
     search(uuid)
     {
+        if (typeof uuid !== "string")
+            throw new Error("Argument uuid must be a string");
+
+        // recursive function for search through child-trees using a depth-first search (dfs) algorithm
         const dfs = function(task, uuid) {
             if (task.uuid === uuid) return task;
             for (let t of task.children) {
                 const s = dfs(t, uuid);
-                if (s) return s;
+                if (s) return s; // task found
             }
-            return null;
+            return null; // if no task is found in this child
         }
 
         for (let t of this.tasks) {
+            // search through every top-level task
             let r = dfs(t, uuid);
-            if (r != null) return r;
+            if (r != null) return r; // task found
         }
+        return null; // if no task is found
+
     }
 
     /**
@@ -228,9 +235,8 @@ class TaskList
      */
     focus(t)
     {
-        if (!(t instanceof Task)) { // control if t is a Task object
-            return;
-        }
+        if (!(t instanceof Task)) // control if t is a Task object
+            throw new Error("Argument t must be a Task object");
 
 
     }

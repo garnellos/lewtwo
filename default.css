@@ -8,7 +8,7 @@ body {
 
 @media (min-width: 45em) {
     body {
-        grid-template-columns: 1fr 3fr 1fr;
+        grid-template-columns: /*1fr*/ 3fr 1fr;
         grid-template-rows: auto 1fr min-content;
     }
 }
@@ -18,7 +18,7 @@ header, footer {
 }
 
 
-/** TASK DISPLAY SETTINGS */
+/** TASK LIST DISPLAY SETTINGS */
 
 /* list of task */
 div#panel-task-list ul {
@@ -33,4 +33,21 @@ div#panel-task-list .task-handle {
 
 div#panel-task-list #new-task-name {
     margin-right: .5em;
+}
+
+/** TASK DETAIL VIEW DISPLAY SETTINGS */
+div#panel-detail #active-task-title {
+    font-weight: bold;
+    font-size: 125%;
+}
+
+div#panel-detail #active-task-due-date {
+
+}
+
+div#panel-detail #active-task-uuid {
+    margin-top: .5em;
+    font-style: italic;
+    font-size: 70%;
+    color: darkgray;
 }

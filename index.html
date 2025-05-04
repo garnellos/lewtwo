@@ -10,9 +10,9 @@
         <header>
             <b>Lightweight task and work organizer</b> Alpha v0.1<br />
         </header>
-        <nav>
+        <!--<nav style="display: none;">
             <i>Navigation view</i>
-        </nav>
+        </nav>-->
         <main>
             <div id="panel-task-list">
                 <ul><!--
@@ -38,10 +38,25 @@
             </div>
         </main>
         <aside>
-            <div id="panel-detail">
-
+            <div id="panel-no-task-selected" style="display: none;">
+                <b>No task selected.</b> Please select any task to show details.
             </div>
-            <i>Detail view</i>
+            <div id="panel-detail">
+                <div>
+                    <input type="checkbox" id="active-task-done" title="Mark this task as (not) done" />
+                    <span id="active-task-title">Title</span>
+                </div>
+                <div>
+                    Due by
+                    <span id="active-task-due-date">05.05.2025 17:00</span>
+                </div>
+                <div id="active-task-description">Long Description.</div>
+                <hr />
+                <button>Add child</button>
+                <button>Select parent</button>
+                <button>Remove</button>
+                <div id="active-task-uuid">####-####-######-######-####-####</div>
+            </div>
         </aside>
         <footer>
             <i>Footer</i>
