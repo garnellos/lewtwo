@@ -9,7 +9,7 @@ Thank you, please enjoy using lewtwo!
 ## Principles
 lewtwos core design principles are:
 
-**Be accessible**: No logging in, no signing up, as little boilerplate as possible, just be easy and intuitive to pick up and start using.
+**Be accessible**: No logging in, no signing up, as little boilerplate as possible while keeping a reasonable amount of functionality. Be easy and intuitive to pick up and start using.
 
 **Save any data locally**: All data that is processed through lewtwo is saved locally through IndexedDB and not uploaded to any cloud, server or SAAS provider. Local export to a JSON file is possible for backups and exchange.
 
