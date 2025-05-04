@@ -87,12 +87,6 @@ class Task
             throw new Error("argument is not an instance of task");
         }
     }
-
-    /** Marks a task as done. */
-    markAsDone()
-    {
-        this.done = true;
-    }
 }
 
 /**
@@ -151,10 +145,22 @@ class TaskList
         // for every task, create a list item
         for (let t of this.tasks) {
             let li = document.createElement("li");
+
+            let check = document.createElement("input");
+            check.setAttribute("type", "checkbox");
+            check.checked = t.done;
+            check.addEventListener("change", function() {
+                t.done = !t.done;
+                window.liveTaskList.render();
+                window.liveTaskList.#updateDetailView();
+            });
+            li.appendChild(check);
+
             let span = document.createElement("span");
             span.classList.add("task-handle");
             span.dataset.taskId = t.uuid;
             span.dataset.selected = "false";
+            span.dataset.done = t.done;
             span.textContent = t.title;
             span.addEventListener("click", (e) => {
                 let l = window.liveTaskList;
@@ -265,13 +271,14 @@ class TaskList
         if (!(t instanceof Task)) // control if t is a Task object
             throw new Error("Argument t must be a Task object");
 
-        // debug log
-        console.log("Focusing task \"" + t.uuid + "\"");
-
         if (this.activeTask) this.activeTask.domElement.dataset.selected = "false";
         this.activeTask = t;
         t.domElement.dataset.selected = "true";
 
+        this.#updateDetailView();
+    }
+
+    #updateDetailView() {
         let formatDateTime = function(date) {
             if (!date) return "-";
             if (!(date instanceof Date)) date = new Date(date);
@@ -286,13 +293,29 @@ class TaskList
             });
         };
 
+        let t = this.activeTask;
+
+        // show task detail panel and hide "no task selected" panel
+        document.querySelector("#panel-no-task-selected").style.display = "none";
+        document.querySelector("#panel-task-details").style.display = "block";
+
         // alter detail panel to contain selected task details
-        document.querySelector("#active-task-title").textContent = t.title;
-        document.querySelector("#active-task-description").textContent = t.description;
-        document.querySelector("#active-task-due-date").textContent = formatDateTime(t.dueDate);
-        document.querySelector("#active-task-done").checked = t.done;
+        let titleElement        = document.querySelector("#active-task-title");
+        let descriptionElement  = document.querySelector("#active-task-description");
+        let dueDateElement      = document.querySelector("#active-task-due-date");
+        let doneElement         = document.querySelector("#active-task-done");
         document.querySelector("#active-task-creation-date").textContent = formatDateTime(t.creationDate);
         document.querySelector("#active-task-uuid").textContent = t.uuid;
+
+        titleElement.textContent = t.title;
+        descriptionElement.textContent = t.description;
+        dueDateElement.textContent = formatDateTime(t.dueDate);
+        doneElement.checked = t.done;
+
+        doneElement.addEventListener("change", function() {
+            t.done = !t.done;
+            window.liveTaskList.render();
+        });
     }
 }
 

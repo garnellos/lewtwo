@@ -35,8 +35,13 @@ div#panel-task-list .task-handle {
 }
 
 div#panel-task-list .task-handle[data-selected="true"] {
-    color: white;
+    color: white !important;
     background-color: black;
+}
+
+div#panel-task-list .task-handle[data-done="true"] {
+    text-decoration: line-through;
+    color: gray;
 }
 
 div#panel-task-list #new-task-name {
