@@ -32,6 +32,8 @@ export const TaskDetailPanel = {
         dueDateElement.textContent = TaskDate.formatDateTime(task.dueDate);
         doneElement.checked = task.done;
 
+        document.querySelector("#active-task-button-select-parent").disabled = task.parent ? false : true;
+
         // add event listeners
         doneElement.onchange = function () {
             task.done = !task.done;
