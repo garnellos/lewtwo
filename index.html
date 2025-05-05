@@ -4,7 +4,7 @@
         <title>Lewtwo - Alpha Build</title>
         <link rel="stylesheet" type="text/css" href="./default.css" />
 
-        <script src="task.js"></script>
+        <script type="module" src="main.js"></script>
     </head>
     <body>
         <header>
@@ -68,16 +68,4 @@
             <i>Footer</i>
         </footer>
     </body>
-    <script type="text/javascript">
-        tasks = new TaskList();
-        tasks.render();
-
-        document.querySelector("main").addEventListener("click", (e) => {
-            // check if the clicked element is a task handle
-            if (!e.target.closest('.task-handle') && !e.target.closest('.task-handle-checkbox')) {
-                window.liveTaskList.unfocus();
-            }
-            // if not: no unfocus
-        });
-    </script>
 </html>
