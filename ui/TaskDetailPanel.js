@@ -32,7 +32,7 @@ export const TaskDetailPanel = {
 
         // alter detail panel to contain selected task details
         document.querySelector("#active-task-creation-date").textContent
-            = TaskDate.formatDateTime(task.creationDate);
+            = TaskDate.formatDateDisplay(task.creationDate);
         document.querySelector("#active-task-uuid").textContent = task.uuid;
 
         // get elements that require event handling
@@ -44,10 +44,10 @@ export const TaskDetailPanel = {
         // set text content to task details as provided
         titleElement.textContent = task.title;
         descriptionElement.innerHTML = task.description || "<i>no description</i>";
-        dueDateElement.textContent = TaskDate.formatDateTime(task.dueDate);
+        dueDateElement.textContent = TaskDate.formatDateDisplay(task.dueDate);
         doneElement.checked = task.done;
 
-        document.querySelector("#active-task-button-select-parent").disabled = task.parent ? false : true;
+        document.querySelector("#active-task-button-select-parent").disabled = !task.parent;
 
         // add event listeners
         doneElement.onchange = function () {
@@ -86,7 +86,19 @@ export const TaskDetailPanel = {
         // fill in task details
         document.querySelector("#edit-task-title").value = task.title;
         document.querySelector("#edit-task-description").value = task.description;
-        document.querySelector("#edit-task-due-date").value = TaskDate.formatDateTime(task.dueDate);
-        
+        document.querySelector("#edit-task-due-date").value = TaskDate.formatDateValue(task.dueDate);
+        document.querySelector("#edit-task-uuid").textContent = task.uuid;
+
+        // add button event listeners
+        document.querySelector("#edit-task-button-save").onclick = function() {
+            task.title = document.querySelector("#edit-task-title").value;
+            task.description = document.querySelector("#edit-task-description").value;
+            task.dueDate = TaskDate.formatDateValue(document.querySelector("#edit-task-due-date").value);
+            TaskListPanel.render();
+            TaskDetailPanel.renderDetails();
+        };
+        document.querySelector("#edit-task-button-cancel").onclick = function() {
+            TaskDetailPanel.renderDetails();
+        };
     }
 }
