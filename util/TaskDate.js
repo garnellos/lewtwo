@@ -15,14 +15,11 @@ export const TaskDate = {
     formatDateTime: (date) => {
         if (!date) return "-";
         if (!(date instanceof Date)) date = new Date(date);
-        // e.g. 29.05.2024, 19:12
+        // e.g. 29.05.2024
         return date.toLocaleDateString("de-DE", {
             day: "2-digit",
             month: "2-digit",
             year: "numeric"
-        }) + " " + date.toLocaleTimeString("de-DE", {
-            hour: "2-digit",
-            minute: "2-digit"
         });
     }
 };

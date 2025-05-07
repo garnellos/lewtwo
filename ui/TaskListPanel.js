@@ -33,7 +33,7 @@ export const TaskListPanel = {
             check.addEventListener("change", function() {
                 t.done = !t.done;
                 TaskListPanel.render(tl);
-                TaskDetailPanel.render();
+                TaskDetailPanel.renderDetails();
             });
             li.appendChild(check);
 

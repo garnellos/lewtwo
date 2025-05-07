@@ -91,7 +91,7 @@ export class TaskList
         this.activeTask = t;
         t.domElement.dataset.selected = "true";
 
-        TaskDetailPanel.render(t);
+        TaskDetailPanel.renderDetails(t);
     }
 
     /**
@@ -102,6 +102,6 @@ export class TaskList
         if (this.activeTask) this.activeTask.domElement.dataset.selected = "false";
         this.activeTask = null;
 
-        TaskDetailPanel.render(null);
+        TaskDetailPanel.renderDetails(null);
     }
 }

@@ -18,10 +18,10 @@ header, footer {
     grid-column: 1 / -1;
 }
 
-button { border-radius: 1em; }
+/* button, input[type="button"] { border-radius: 1em; } */
 
 
-/** TASK LIST DISPLAY SETTINGS */
+/** TASK LIST **/
 
 /* list of task */
 div#panel-task-list ul {
@@ -49,7 +49,7 @@ div#panel-task-list #new-task-name {
     margin-right: .5em;
 }
 
-/** TASK DETAIL VIEW DISPLAY SETTINGS */
+/** TASK DETAIL / EDIT VIEW **/
 #panel-task-details #active-task-title {
     font-weight: bold;
     font-size: 125%;
@@ -64,13 +64,25 @@ div#panel-task-list #new-task-name {
     color: black;
 }
 
-#panel-task-details #active-task-uuid, #panel-task-details #active-task-creation-date-wrapper {
+#panel-task-details #active-task-uuid, #panel-task-details #active-task-creation-date-wrapper,
+#panel-task-edit #edit-task-uuid {
     margin-top: .5em;
     font-style: italic;
     font-size: 70%;
     color: darkgray;
 }
 
-#panel-task-details #active-task-uuid {
+#panel-task-details #active-task-uuid, #panel-task-edit #edit-task-uuid {
     font-family: monospace;
+}
+
+#panel-task-edit #edit-task-title {
+    width: 100%;
+    font-size: 125%;
+}
+
+#panel-task-edit #edit-task-description {
+    margin-top: .5em;
+    width: 100%;
+    height: 10em;
 }

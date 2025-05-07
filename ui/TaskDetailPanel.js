@@ -2,17 +2,32 @@ import { TaskDate } from "../util/TaskDate.js";
 import { TaskListPanel } from "./TaskListPanel.js";
 
 export const TaskDetailPanel = {
-    render: (task = window.liveTaskList.activeTask) =>
+    /**
+     * Renders the details of the currently selected task in the task details panel.
+     * If no task is selected, shows a "no task selected" panel instead.
+     *
+     * This function updates the UI elements within the task detail panel to display
+     * the properties and attributes of the provided task. It also binds appropriate
+     * event listeners for interactive functionality, such as marking a task as done
+     * or editing the task.
+     *
+     * @function
+     * @param {Object} [task=window.liveTaskList.activeTask] - The task object to display in the details panel.
+     * If not provided, the active task from `window.liveTaskList` is used.
+     */
+    renderDetails: (task = window.liveTaskList.activeTask) =>
     {
         // if no task selected, show the default panel and return
         if (!task) {
             document.querySelector("#panel-task-details").style.display = "none";
+            document.querySelector("#panel-task-edit").style.display = "none";
             document.querySelector("#panel-no-task-selected").style.display = "block";
             return;
         }
 
-        // show task detail panel and hide "no task selected" panel
+        // show task detail panel and hide "no task selected" / task edit panel
         document.querySelector("#panel-no-task-selected").style.display = "none";
+        document.querySelector("#panel-task-edit").style.display = "none";
         document.querySelector("#panel-task-details").style.display = "block";
 
         // alter detail panel to contain selected task details
@@ -40,10 +55,15 @@ export const TaskDetailPanel = {
             TaskListPanel.render();
         };
 
+        // edit button events
+        document.querySelector("#active-task-button-edit").onclick = function() {
+            TaskDetailPanel.renderEdit(task);
+        };
+
         /*
         titleElement.onclick = function() {
             t.title = prompt("Enter new title: ", t.title) || t.title;
-            window.liveTaskList.render();
+            window.liveTaskList.renderDetails();
             window.liveTaskList.updateDetailView();
         }
 
@@ -52,5 +72,21 @@ export const TaskDetailPanel = {
             window.liveTaskList.updateDetailView();
         };
         */
+    },
+
+    renderEdit: (task = window.liveTaskList.activeTask) =>
+    {
+        if (!task) return;
+
+        // hide details, show edit panel
+        document.querySelector("#panel-task-edit").style.display = "block";
+        document.querySelector("#panel-task-details").style.display = "none";
+        document.querySelector("#panel-no-task-selected").style.display = "none";
+
+        // fill in task details
+        document.querySelector("#edit-task-title").value = task.title;
+        document.querySelector("#edit-task-description").value = task.description;
+        document.querySelector("#edit-task-due-date").value = TaskDate.formatDateTime(task.dueDate);
+        
     }
 }
