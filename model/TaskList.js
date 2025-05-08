@@ -20,6 +20,12 @@ export class TaskList
      */
     activeTask = null;
 
+    /**
+     * sets if the current focus should be locked.
+     * @type {boolean}
+     */
+    lockFocus = false;
+
 
     // constructor
 
@@ -87,6 +93,11 @@ export class TaskList
         if (!(t instanceof Task)) // control if t is a Task object
             throw new Error("Argument t must be a Task object");
 
+        if (this.lockFocus) {
+            console.error("Focus is locked.");
+            return;
+        }
+
         if (this.activeTask) this.activeTask.domElement.dataset.selected = "false";
         this.activeTask = t;
         t.domElement.dataset.selected = "true";
@@ -99,6 +110,11 @@ export class TaskList
      */
     unfocus()
     {
+        if (this.lockFocus) {
+            console.error("Focus is locked.");
+            return;
+        }
+
         if (this.activeTask) this.activeTask.domElement.dataset.selected = "false";
         this.activeTask = null;
 

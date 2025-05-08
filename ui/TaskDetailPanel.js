@@ -78,6 +78,10 @@ export const TaskDetailPanel = {
     {
         if (!task) return;
 
+        // lock focus
+        window.liveTaskList.activeTask = task;
+        window.liveTaskList.lockFocus = true;
+
         // hide details, show edit panel
         document.querySelector("#panel-task-edit").style.display = "block";
         document.querySelector("#panel-task-details").style.display = "none";
@@ -91,14 +95,29 @@ export const TaskDetailPanel = {
 
         // add button event listeners
         document.querySelector("#edit-task-button-save").onclick = function() {
-            task.title = document.querySelector("#edit-task-title").value;
+            // check if task title input has text
+            if (document.querySelector("#edit-task-title").value !== "") {
+                // if yes: save
+                task.title = document.querySelector("#edit-task-title").value;
+            } else {
+                // else: discard change, output error
+                console.error("task title must not be empty");
+            }
+
+            // save description and due date
             task.description = document.querySelector("#edit-task-description").value;
             task.dueDate = TaskDate.formatDateValue(document.querySelector("#edit-task-due-date").value);
+
+            // unlock focus
+            window.liveTaskList.lockFocus = false;
+
+            // render panels as needed
             TaskListPanel.render();
             TaskDetailPanel.renderDetails();
         };
         document.querySelector("#edit-task-button-cancel").onclick = function() {
             TaskDetailPanel.renderDetails();
+            window.liveTaskList.lockFocus = false;
         };
     }
 }
