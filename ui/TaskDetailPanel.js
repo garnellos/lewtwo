@@ -12,7 +12,7 @@ export const TaskDetailPanel = {
      * or editing the task.
      *
      * @function
-     * @param {Object} [task=window.liveTaskList.activeTask] - The task object to display in the details panel.
+     * @param {Task} [task=window.liveTaskList.activeTask] - The task object to display in the details panel.
      * If not provided, the active task from `window.liveTaskList` is used.
      */
     renderDetails: (task = window.liveTaskList.activeTask) =>
@@ -51,11 +51,11 @@ export const TaskDetailPanel = {
 
         // add event listeners
         doneElement.onchange = function () {
+            // toggle task-done state
             task.done = !task.done;
             TaskListPanel.render();
         };
 
-        // edit button events
         document.querySelector("#active-task-button-edit").onclick = function() {
             TaskDetailPanel.renderEdit(task);
         };
@@ -74,6 +74,12 @@ export const TaskDetailPanel = {
         */
     },
 
+    /**
+     * Renders the edit panel and sets it up to edit the task parameter, alternatively the active task of the live task
+     * list. Also sets up handling for saving and discarding changes.
+     * @function
+     * @param {Task} [task=window.liveTaskList.activeTask] The task to be edited.
+     */
     renderEdit: (task = window.liveTaskList.activeTask) =>
     {
         if (!task) return;

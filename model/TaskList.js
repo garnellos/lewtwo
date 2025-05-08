@@ -94,6 +94,7 @@ export class TaskList
             throw new Error("Argument t must be a Task object");
 
         if (this.lockFocus) {
+            // don't change focus if focus is locked.
             console.error("Focus is locked.");
             return;
         }
@@ -111,6 +112,7 @@ export class TaskList
     unfocus()
     {
         if (this.lockFocus) {
+            // don't change focus if focus is locked
             console.error("Focus is locked.");
             return;
         }
