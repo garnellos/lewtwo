@@ -22,6 +22,8 @@ export const TaskListPanel = {
         let ul = document.createElement("ul");
         taskListView.innerHTML = "";
 
+        // TODO recursion, display of children
+
         // for every task, create a list item
         for (let t of tl.tasks) {
             let li = document.createElement("li");

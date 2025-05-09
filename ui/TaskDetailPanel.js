@@ -1,5 +1,6 @@
 import { TaskDate } from "../util/TaskDate.js";
 import { TaskListPanel } from "./TaskListPanel.js";
+import {Task} from "../model/Task.js";
 
 export const TaskDetailPanel = {
     /**
@@ -59,6 +60,28 @@ export const TaskDetailPanel = {
         document.querySelector("#active-task-button-edit").onclick = function() {
             TaskDetailPanel.renderEdit(task);
         };
+
+        document.querySelector("#active-task-button-add-child").onclick = function() {
+            new Task(
+                prompt("Enter new task title...") || "",
+                "",
+                task,
+                new Date(),
+                null,
+                false
+            );
+        }
+
+        document.querySelector("#active-task-button-remove").onclick = function() {
+            throw new Error("Not implemented yet"); // TODO implement
+            /*
+            if (confirm("Are you sure you want to delete this task?")) {
+                window.liveTaskList.removeTask(task);
+                TaskListPanel.render();
+                TaskDetailPanel.renderDetails();
+            }
+             */
+        }
 
         /*
         titleElement.onclick = function() {

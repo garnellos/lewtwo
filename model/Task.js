@@ -59,7 +59,7 @@ export class Task
         this.description = description;
 
         this.parent = parent;
-        if (parent != null) parent.addChild(this); // add to parents' list if no top-level task
+        if (parent instanceof Task) parent.addChild(this); // add to parents' list if no top-level task
 
         this.#children = [];
         this.#creationDate = creationDate;
@@ -88,10 +88,15 @@ export class Task
     /** Adds a child task. */
     addChild(t)
     {
-        if (t instanceof Task) {
-            this.#children.push(t);
-        } else {
+        if (!(t instanceof Task)) { // check if t is a Task
             throw new Error("argument is not an instance of task");
         }
+        if (this.#children.includes(t)) { // avoid duplicate child assignments
+            return;
+        }
+        this.#children.push(t);
     }
+
+    // TODO removeChild(t)
+    // TODO isChild(t) (any depth)
 }
