@@ -80,7 +80,7 @@ export class TaskList
                             return haystack.removeChild(needle); // remove needle from haystack's children array
                         } else {
                             for (let c of haystack.children) { // check for needle in all of haystack's children
-                                removeFromChildren(c, needle);
+                                if (removeFromChildren(c, needle)) return true;
                             }
                         }
 
