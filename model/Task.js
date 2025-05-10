@@ -85,7 +85,10 @@ export class Task
 
     // methods
 
-    /** Adds a child task. */
+    /** Adds a child task.
+     * @param {Task} t The task to add. Must be an instance of the Task class.
+     * @throws {Error} Throws an error if the provided argument is not an instance of the Task class.
+     */
     addChild(t)
     {
         if (!(t instanceof Task)) { // check if t is a Task
@@ -97,6 +100,30 @@ export class Task
         this.#children.push(t);
     }
 
-    // TODO removeChild(t)
-    // TODO isChild(t) (any depth)
+    /** Removes a direct child task (not including child tasks of child tasks, etc.).
+     * @param {Task} t The task to remove. */
+    removeChild(t)
+    {
+        if (this.#children.includes(t)) {
+            this.#children.splice(this.#children.indexOf(t), 1);
+        }
+    }
+
+    /** Determines if the provided Task object is a child of this task.
+     * @param {Task} t The task to check for.
+     * @param {boolean} [anyDepth=false] If true, checks if the provided task is a child of this task or any of its
+     * child tasks. If false, only checks if the provided task is a direct child of this task.
+     * @returns {boolean} True if the provided task is a child of this task, false otherwise.
+     */
+    isChild(t, anyDepth = false)
+    {
+        if (anyDepth) {
+            for (let c of this.children) {
+                if (c.isChild(t, true)) return true;
+            }
+            return false;
+        } else {
+            return this.children.includes(t);
+        }
+    }
 }
