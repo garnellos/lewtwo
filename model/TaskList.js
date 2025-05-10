@@ -1,5 +1,6 @@
 import { Task } from "./Task.js";
 import { TaskDetailPanel } from "../ui/TaskDetailPanel.js";
+import { TaskListPanel } from "../ui/TaskListPanel.js";
 
 /**
  * Represents a list of top-level tasks, i.e. instances of the Task class.
@@ -41,13 +42,33 @@ export class TaskList
 
     // methods
 
-    /** Adds a task to the list. */
+    /** Adds a task to the list.
+     * @param {Task} t The task to add. Must be an instance of the Task class.
+     * @throws {Error} Throws an error if the provided argument is not an instance of the Task class. */
     addTask(t)
     {
         if (t instanceof Task)
             this.tasks.push(t);
         else
             throw new Error("Parameter is not a Task object.");
+    }
+
+    /** Removes a task from the list.
+     * @param {Task} t The task to remove.
+     * @returns {boolean} True if the task was removed, false otherwise. */
+    removeTask(t)
+    {
+        if (this.tasks.includes(t)) {
+            const r = this.tasks.splice(this.tasks.indexOf(t), 1);
+            if (this.activeTask === t) {
+                this.activeTask = null;
+                TaskDetailPanel.renderDetails();
+            }
+            TaskListPanel.render();
+            if (r) return true;
+            return false;
+        }
+        return false;
     }
 
     /**

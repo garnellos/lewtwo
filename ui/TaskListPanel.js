@@ -15,12 +15,12 @@ export const TaskListPanel = {
             throw new Error("Argument tl must be an instance of TaskList");
         }
         
-        // select viewport
+        // select and clear viewport
         let taskListView = document.querySelector("#panel-task-list");
-
-        // select and clear ul
-        let ul = document.createElement("ul");
         taskListView.innerHTML = "";
+
+        // select ul
+        let ul = document.createElement("ul");
 
         // TODO recursion, display of children
 
