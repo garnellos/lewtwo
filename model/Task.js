@@ -120,6 +120,7 @@ export class Task
     isChild(t, anyDepth = false)
     {
         if (anyDepth) {
+            if (this.children.includes(t)) return true;
             for (let c of this.children) {
                 if (c.isChild(t, true)) return true;
             }
