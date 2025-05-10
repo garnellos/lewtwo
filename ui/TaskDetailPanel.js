@@ -73,7 +73,7 @@ export const TaskDetailPanel = {
         }
 
         document.querySelector("#active-task-button-remove").onclick = function() {
-            if (confirm("Are you sure you want to delete this task?")) {
+            if (confirm("Are you sure you want to delete this task (and all of its children)?")) {
                 const s = window.liveTaskList.removeTask(task);
                 if (!s) console.error("failed to remove active task");
             }

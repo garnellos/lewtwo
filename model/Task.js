@@ -101,11 +101,13 @@ export class Task
     }
 
     /** Removes a direct child task (not including child tasks of child tasks, etc.).
-     * @param {Task} t The task to remove. */
+     * @param {Task} t The task to remove.
+     * @returns {boolean} True if the task was successfully removed, false otherwise. */
     removeChild(t)
     {
         if (this.#children.includes(t)) {
-            this.#children.splice(this.#children.indexOf(t), 1);
+            const c = this.#children.splice(this.#children.indexOf(t), 1);
+            return c[0] === t;
         }
     }
 
