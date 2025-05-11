@@ -60,8 +60,8 @@ export const TaskDetailPanel = {
         };
 
         document.querySelector("#active-task-button-add-child").onclick = function() {
-            let title = prompt("Enter new task title...");
-            if (!title) return;
+            let title = prompt("Enter new task title...")?.trim();
+            if (!title || title.trim() === "") return;
             new Task(
                 title,
                 "",
