@@ -20,6 +20,9 @@ header, footer {
 
 /* button, input[type="button"] { border-radius: 1em; } */
 
+#menu-toggle {
+    cursor: pointer;
+}
 
 /** TASK LIST **/
 

@@ -27,3 +27,13 @@ document.querySelector("main").addEventListener("click", (e) => {
     }
     // if not: don't unfocus
 });
+
+document.querySelector("#menu-toggle").addEventListener("click", () => {
+    document.querySelector("#menu").style.display =
+        (document.querySelector("#menu").style.display === "none" ? "inline-block" : "none");
+});
+
+document.querySelector("#menu-button-expand-all").addEventListener("click", () => {
+    TaskListPanel.foldMap = new Map([]);
+    TaskListPanel.render(window.liveTaskList);
+});
