@@ -4,6 +4,18 @@ import { TaskDetailPanel } from "./TaskDetailPanel.js";
 
 export const TaskListPanel = {
 
+    /*
+     * character representing the icon for unfolding a task list item
+     */
+    foldShow: "\u2b9e",
+
+    /*
+     * character representing the icon for folding a task list item
+     */
+    foldHide: "\u2b9f",
+
+    foldMap: new Map([]),
+
     /**
      * Returns DOM nodes for an HTML view of the task list.
      * @param {TaskList} tl The task list object to be rendered.
@@ -22,9 +34,37 @@ export const TaskListPanel = {
         // select ul
         let ul = document.createElement("ul");
 
-        // TODO recursion, display of children
-        const rrender = (t) => {
+        /*
+         * Recursive function that renders a task list item and its children, if it has any.
+         * @returns {HTMLLIElement} The rendered list item.
+         */
+        const recRender = (t) => {
             let li = document.createElement("li");
+
+            let fold = document.createElement("span");
+            fold.classList.add("task-handle-fold");
+
+            if (t.children.length === 0) {
+                // no children, hide fold icon
+                fold.textContent = "";
+            } else {
+                // has children
+                if (!TaskListPanel.foldMap.has(t.uuid)) {
+                    TaskListPanel.foldMap.set(t.uuid, false); // unfolded by default
+                }
+                // set fold icon depending on fold state
+                fold.textContent = TaskListPanel.foldMap.get(t.uuid) ? TaskListPanel.foldShow : TaskListPanel.foldHide;
+            }
+
+            fold.addEventListener("click", function() {
+                let refUl = fold.parentElement.querySelector('ul');
+
+                refUl.style.display = (refUl.style.display === "none" ? "block" : "none");
+                fold.textContent =
+                    (fold.textContent == TaskListPanel.foldHide ? TaskListPanel.foldShow : TaskListPanel.foldHide);
+                TaskListPanel.foldMap.set(t.uuid, (refUl.style.display === "none"));
+            })
+            li.appendChild(fold);
 
             let check = document.createElement("input");
             check.setAttribute("type", "checkbox");
@@ -55,7 +95,12 @@ export const TaskListPanel = {
             if (t.children.length > 0) {
                 let childUl = document.createElement("ul");
                 for (let c of t.children) {
-                    childUl.appendChild(rrender(c));
+                    childUl.appendChild(recRender(c));
+                }
+                if (TaskListPanel.foldMap.get(t.uuid)) {
+                    childUl.style.display = "none";
+                } else {
+                    childUl.style.display = "block";
                 }
                 li.appendChild(childUl);
             }
@@ -64,9 +109,9 @@ export const TaskListPanel = {
         }
 
 
-        // for every task, create a list item
+        // for every top-level task, create a list item
         for (let t of tl.tasks) {
-            ul.appendChild(rrender(t));
+            ul.appendChild(recRender(t));
         }
 
         // add buttons for adding additional tasks...

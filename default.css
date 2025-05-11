@@ -35,6 +35,12 @@ div#panel-task-list .task-handle {
     user-select: none; /* prevent text selection */
 }
 
+div#panel-task-list .task-handle-fold {
+    display: inline-block;
+    cursor: pointer;
+    min-width: 1em;
+}
+
 div#panel-task-list .task-handle[data-selected="true"] {
     color: white !important;
     background-color: black;
