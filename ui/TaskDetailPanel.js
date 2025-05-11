@@ -70,6 +70,7 @@ export const TaskDetailPanel = {
                 null,
                 false
             );
+            TaskListPanel.render();
         }
 
         document.querySelector("#active-task-button-remove").onclick = function() {

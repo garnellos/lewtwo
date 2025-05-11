@@ -23,9 +23,7 @@ export const TaskListPanel = {
         let ul = document.createElement("ul");
 
         // TODO recursion, display of children
-
-        // for every task, create a list item
-        for (let t of tl.tasks) {
+        const rrender = (t) => {
             let li = document.createElement("li");
 
             let check = document.createElement("input");
@@ -53,7 +51,22 @@ export const TaskListPanel = {
             t.domElement = span;
 
             li.appendChild(span);
-            ul.appendChild(li);
+
+            if (t.children.length > 0) {
+                let childUl = document.createElement("ul");
+                for (let c of t.children) {
+                    childUl.appendChild(rrender(c));
+                }
+                li.appendChild(childUl);
+            }
+
+            return li;
+        }
+
+
+        // for every task, create a list item
+        for (let t of tl.tasks) {
+            ul.appendChild(rrender(t));
         }
 
         // add buttons for adding additional tasks...
