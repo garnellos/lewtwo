@@ -3,20 +3,40 @@
     <head>
         <title>Lewtwo - Alpha Build</title>
         <link rel="stylesheet" type="text/css" href="./default.css" />
-
         <script type="module" src="main.js"></script>
     </head>
     <body>
         <header>
-            <span id="menu-toggle" title="Menu">&equiv;</span>
+            <span id="menu-toggle" title="Toggle main menu">&equiv;</span>
             <b>Lightweight task and work organizer</b> Alpha v0.1<br/>
             <span id="menu">
-                <button id="menu-button-expand-all" type="button">Expand all</button>
-                <button id="menu-button-collapse-all" type="button" disabled>Collapse all</button>
-                <button id="menu-button-save" type="button" disabled>Save</button>
-                <button id="menu-button-load" type="button" disabled>Load</button>
-                <button id="menu-button-export" type="button" disabled>Export</button>
-                <button id="menu-button-import" type="button" disabled>Import</button>
+                <button id="menu-button-expand-all" type="button" title="Show all tasks and subtasks">
+                    Expand all
+                </button>
+                <button id="menu-button-collapse-all" type="button" disabled
+                        title="Show only top-level tasks, collapse all subtasks">
+                    Collapse all
+                </button>
+                <button id="menu-button-save" type="button" disabled title="Manually save task list to browser storage">
+                    Save
+                </button>
+                <button id="menu-button-load" type="button" disabled
+                        title="Manually load task list from browser storage">
+                    Load
+                </button>
+                <button id="menu-button-export" type="button" disabled title="Export task list to a JSON file">
+                    Export
+                </button>
+                <button id="menu-button-import" type="button" disabled title="Import a task list from a JSON file">
+                    Import
+                </button>
+                <label for="menu-select-due-display">Display due dates in list: </label>
+                <select id="menu-select-due-display">
+                    <option value="none" selected>None</option>
+                    <option value="dates">Dates</option>
+                    <option value="badges">Badges</option>
+                    <option value="colours">Colours</option>
+                </select>
             </span>
         </header>
         <!--<nav style="display: none;">

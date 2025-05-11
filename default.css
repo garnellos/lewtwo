@@ -58,6 +58,19 @@ div#panel-task-list #new-task-name {
     margin-right: .5em;
 }
 
+div#panel-task-list .task-small-due-date {
+    margin-left: .5em;
+    font-size: 70%;
+    color: darkgray;
+}
+
+div#panel-task-list .due-date-badge {
+    font-size: 70%;
+    padding: .1em .5em;
+    border-radius: 1em;
+    margin-left: .5em;
+}
+
 /** TASK DETAIL / EDIT VIEW **/
 #panel-task-details #active-task-title {
     font-weight: bold;

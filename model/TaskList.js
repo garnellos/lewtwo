@@ -27,6 +27,12 @@ export class TaskList
      */
     lockFocus = false;
 
+    /**
+     * Saves settings for this task list. The following keys are in use:<br>
+     * <b>due-display</b>: sets in which fashion the due dates are presented in the task list.
+     * Possible values: `none`, `dates`, `badges`, `colours`
+     */
+    settings = new Map();
 
     // constructor
 
@@ -37,8 +43,10 @@ export class TaskList
          * The currently active `TaskList` instance that manages the tasks that are on screen.
          */
         window.liveTaskList = this;
-    }
 
+        // default setting for due-display
+        this.settings.set("due-display", "none");
+    }
 
     // methods
 

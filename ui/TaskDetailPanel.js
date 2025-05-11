@@ -119,7 +119,8 @@ export const TaskDetailPanel = {
 
             // save description and due date
             task.description = document.querySelector("#edit-task-description").value;
-            task.dueDate = TaskDate.formatDateValue(document.querySelector("#edit-task-due-date").value);
+            task.dueDate =
+                new Date(TaskDate.formatDateValue(document.querySelector("#edit-task-due-date").value));
 
             // unlock focus
             window.liveTaskList.lockFocus = false;

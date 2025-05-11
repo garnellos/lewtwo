@@ -37,5 +37,46 @@ export const TaskDate = {
         const mm = String(date.getMonth() + 1).padStart(2, '0');
         const dd = String(date.getDate()).padStart(2, '0');
         return `${yyyy}-${mm}-${dd}`;
+    },
+
+    toDateOnly: (date) => {
+        if (!(date instanceof Date)) throw new Error("date must be a Date object");
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    },
+
+    compareToToday: (date) => {
+        if (!(date instanceof Date)) throw new Error("date must be a Date object");
+        const today  = TaskDate.toDateOnly(new Date());
+        const target = TaskDate.toDateOnly(date);
+
+        if (target < today) return -1;
+        if (target > today) return 1;
+        return 0;
+    },
+
+    getColour: (date) => {
+        const ts = TaskDate.compareToToday(date);
+        if (ts < 0) return "red";
+        if (ts === 0) return "darkgoldenrod";
+        return "black";
+    },
+
+    getBadge: (date) => {
+        let badge = document.createElement("span");
+        badge.classList.add("due-date-badge");
+        const ts = TaskDate.compareToToday(date);
+        if (ts < 0) {
+            badge.textContent = "overdue";
+            badge.style.backgroundColor = "red";
+            badge.style.border = "thin solid darkred";
+            badge.style.color = "white";
+            return badge;
+        } else if (ts === 0) {
+            badge.textContent = "due today";
+            badge.style.backgroundColor = "gold";
+            badge.style.border = "thin solid darkgoldenrod";
+            badge.style.color = "black";
+            return badge;
+        }
     }
 };

@@ -37,3 +37,9 @@ document.querySelector("#menu-button-expand-all").addEventListener("click", () =
     TaskListPanel.foldMap = new Map([]);
     TaskListPanel.render(window.liveTaskList);
 });
+
+document.querySelector("#menu-select-due-display").addEventListener("change",
+    (e) => {
+    window.liveTaskList.settings.set("due-display", e.target.value);
+    TaskListPanel.render(window.liveTaskList);
+});

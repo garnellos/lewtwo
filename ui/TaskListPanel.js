@@ -1,6 +1,7 @@
 import { Task } from "../model/Task.js";
 import { TaskList } from "../model/TaskList.js";
 import { TaskDetailPanel } from "./TaskDetailPanel.js";
+import { TaskDate } from "../util/TaskDate.js";
 
 export const TaskListPanel = {
 
@@ -60,6 +61,7 @@ export const TaskListPanel = {
                 let refUl = fold.parentElement.querySelector('ul');
 
                 refUl.style.display = (refUl.style.display === "none" ? "block" : "none");
+                // noinspection EqualityComparisonWithCoercionJS
                 fold.textContent =
                     (fold.textContent == TaskListPanel.foldHide ? TaskListPanel.foldShow : TaskListPanel.foldHide);
                 TaskListPanel.foldMap.set(t.uuid, (refUl.style.display === "none"));
@@ -91,6 +93,30 @@ export const TaskListPanel = {
             t.domElement = span;
 
             li.appendChild(span);
+
+            // add due date depending on setting
+            if (t.dueDate) {
+                switch (tl.settings.get("due-display")) {
+                    case "none":
+                        break;
+                    case "dates":
+                        let spanDueDate = document.createElement("span");
+                        spanDueDate.classList.add("task-small-due-date");
+                        spanDueDate.textContent = TaskDate.formatDateDisplay(t.dueDate);
+                        spanDueDate.style.color = TaskDate.getColour(t.dueDate);
+                        li.appendChild(spanDueDate);
+                        break;
+                    case "badges":
+                        let spanBadge = TaskDate.getBadge(t.dueDate);
+                        if (spanBadge) li.appendChild(spanBadge);
+                        break;
+                    case "colours":
+                        span.style.color = TaskDate.getColour(t.dueDate);
+                        break;
+                    default:
+                        console.error("invalid due-display setting");
+                }
+            }
 
             if (t.children.length > 0) {
                 let childUl = document.createElement("ul");
