@@ -225,9 +225,10 @@ export class TaskList
             tasks.push(t.serialise());
         }
         let settings = [];
-        for (let [key, value] of this.settings) {
-            settings[key] = value;
-        }
+        this.settings.forEach((value, key) => {
+            console.log(key + " : " + value);
+            settings.push([key, value]);
+        });
         return {
             tasks,
             settings

@@ -61,3 +61,42 @@ document.querySelector("#menu-button-save").addEventListener("click", () => {
         console.log("Task list saved successfully.");
     });
 });
+
+// Exportiere die aktuelle Task-Liste als JSON
+function exportTaskList() {
+    const serialised = window.liveTaskList.serialise();
+    const blob = new Blob([JSON.stringify(serialised, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = "lewtwo_tasks.json";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }, 0);
+}
+document.getElementById("menu-button-export").addEventListener("click", exportTaskList);
+
+// Erzeuge unsichtbares Input für Datei-Upload (nur einmal anlegen)
+document.getElementById("menu-input-import").addEventListener("change", async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    try {
+        const text = await file.text();
+        const json = JSON.parse(text);
+        TaskListPanel.render(TaskList.deserialise(json));
+        alert("Imported task list successfully.");
+    } catch (e) {
+        alert("Error importing task list! " + e.message);
+    }
+    document.getElementById("menu-input-import").value = ""; // Reset für den nächsten Upload
+});
+
+// Aktiviere und verbinde den "Import"-Button
+document.getElementById("menu-button-import").addEventListener("click", () => {
+    document.getElementById("menu-input-import").click();
+});
