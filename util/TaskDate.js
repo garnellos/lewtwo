@@ -1,4 +1,3 @@
-
 export const TaskDate = {
     /**
      * Formats a given date into a localised string representation.
