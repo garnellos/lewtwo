@@ -2,12 +2,14 @@
 
 lewtwo is a software for task and work organization that runs in any browser and does not need to be installed, deployed or hosted through a server. Just download, open, and you're good to go.
 
-lewtwo is available through the terms of the GNU GPL-2.0 license.
+Try it, it is live at [lewtwo.glitch.me](https://lewtwo.glitch.me/)!
+
+lewtwo is available through the terms of the GNU GPL-2.0 licence and comes with no warranty. 
 
 Thank you, please enjoy using lewtwo!
 
-## Principles
-lewtwos core design principles are:
+## What's special about lewtwo?
+lewtwos core design ideas are:
 
 **Be accessible**: No logging in, no signing up, as little boilerplate as possible while keeping a reasonable amount of functionality. Be easy and intuitive to pick up and start using.
 
