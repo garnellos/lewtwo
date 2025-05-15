@@ -4,7 +4,7 @@ import { TaskListPanel } from "./ui/TaskListPanel.js";
 import { TaskDetailPanel } from "./ui/TaskDetailPanel.js";
 import { TaskDate } from "./util/TaskDate.js";
 
-// debug assignments so modules can be used in the console
+// debug assignments that allow use of modules from the console
 window.logic = {
     model: {},
     util: {},
@@ -17,6 +17,26 @@ window.logic.ui.TaskListPanel = TaskListPanel;
 window.logic.ui.TaskDetailPanel = TaskDetailPanel;
 // end debug assignments
 
+// open IndexedDB
+/* the IndexedDB buffer for the lewtwo app */
+let dbHandle;
+
+/* name of the IndexedDB database */
+const dbName = "lewtwo";
+
+const dbRequest = window.indexedDB.open(dbName, 3);
+dbRequest.onerror = (e) => {
+    console.error(`IndexedDB error! ${e.target.error?.message}`);
+    alert(`Please allow use of IndexedDB to use lewtwo.`);
+};
+dbRequest.onsuccess = (e) => {
+    dbHandle = e.target.result;
+};
+dbRequest.onupgradeneeded = (e) => {
+    const objStore = dbHandle.createObjectStore("TaskList");
+};
+
+// create TaskList
 let taskList = new TaskList();
 TaskListPanel.render(taskList);
 
