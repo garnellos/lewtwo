@@ -24,7 +24,7 @@ let dbHandle;
 /* name of the IndexedDB database */
 const dbName = "lewtwo";
 
-const dbRequest = window.indexedDB.open(dbName, 3);
+const dbRequest = window.indexedDB.open(dbName, 1);
 dbRequest.onerror = (e) => {
     console.error(`IndexedDB error! ${e.target.error?.message}`);
     alert(`Please allow use of IndexedDB to use lewtwo.`);
