@@ -24,7 +24,7 @@ export const Database = {
         const db = await Database.openDatabase();
         const tx = db.transaction(Database.dbStoreName, "readwrite");
         const store = tx.objectStore(Database.dbStoreName);
-        store.put({key: "taskList", tasks: window.liveTaskList, lastUpdated: Date.now()});
+        store.put({key: "taskList", tasks: window.liveTaskList.serialise(), lastUpdated: Date.now()});
     },
 
     loadTaskList: async function() {

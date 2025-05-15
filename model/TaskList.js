@@ -39,10 +39,6 @@ export class TaskList
     constructor()
     {
         this.tasks = [];
-        /**
-         * The currently active `TaskList` instance that manages the tasks that are on screen.
-         */
-        window.liveTaskList = this;
 
         // default setting for due-display
         this.settings.set("due-display", "none");
@@ -220,5 +216,37 @@ export class TaskList
         this.activeTask = null;
 
         TaskDetailPanel.renderDetails(null);
+    }
+
+    serialise()
+    {
+        let tasks = [];
+        for (let t of this.tasks) {
+            tasks.push(t.serialise());
+        }
+        let settings = [];
+        for (let [key, value] of this.settings) {
+            settings[key] = value;
+        }
+        return {
+            tasks,
+            settings
+        };
+    }
+
+    static deserialise(data)
+    {
+        if (!data) return;
+        if (!data.tasks) return;
+        if (!data.settings) return;
+
+        let tl = new TaskList();
+        for (let t of data.tasks) {
+            tl.tasks.push(Task.deserialise(t, null));
+        }
+        for (let [key, value] of data.settings) {
+            tl.settings.set(key, value);
+        }
+        return tl;
     }
 }

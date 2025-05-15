@@ -199,5 +199,11 @@ export const TaskListPanel = {
 
         // add task list to view
         taskListView.appendChild(ul);
+
+        // set as live task list
+        /**
+         * The currently active `TaskList` instance that manages the tasks that are on screen.
+         */
+        window.liveTaskList = tl;
     }
 };

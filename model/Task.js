@@ -29,8 +29,10 @@ export class Task
     /** determines if task is done */
     done;
 
-    /** @type HTMLElement
-     * The DOM Element of this task, if it is already rendered. */
+    /**
+     * @type HTMLElement
+     * The DOM Element of this task, if it is already rendered.
+     */
     domElement;
 
 
@@ -128,5 +130,39 @@ export class Task
         } else {
             return this.children.includes(t);
         }
+    }
+
+    serialise()
+    {
+        let children = [];
+        for (let c of this.children)
+            children.push(c.serialise());
+        return {
+            uuid: this.uuid,
+            title: this.title,
+            description: this.description,
+            parent: this.parent?.uuid,
+            children: children,
+            creationDate: this.creationDate,
+            dueDate: this.dueDate,
+            done: this.done
+        };
+    }
+
+    static deserialise(data, p = null)
+    {
+        if (!data) return;
+        let t = new Task(
+            data.title,
+            data.description,
+            p,
+            data.creationDate,
+            data.dueDate,
+            data.done
+        );
+        for (let c of data.children) {
+            t.addChild(Task.deserialise(c, p));
+        }
+        return t;
     }
 }
