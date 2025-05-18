@@ -83,6 +83,7 @@ export const TaskListPanel = {
             span.classList.add("task-handle");
             span.dataset.taskId = t.uuid;
             span.dataset.selected = "false";
+            span.dataset.related = "false";
             span.dataset.done = t.done;
             span.textContent = t.title;
             span.addEventListener("click", (e) => {
@@ -194,8 +195,9 @@ export const TaskListPanel = {
         })());
 
         // If there's an active task, mark its DOM element as selected to highlight it in the UI
-        if (tl.activeTask)
+        if (tl.activeTask) {
             tl.activeTask.domElement.dataset.selected = "true";
+        }
 
         // add task list to view
         taskListView.appendChild(ul);

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Lewtwo v0.1.1-alpha</title>
+        <title>lewtwo v0.1.1-alpha</title>
         <link rel="stylesheet" type="text/css" href="./default.css" />
         <script type="module" src="main.js"></script>
     </head>
@@ -30,13 +30,16 @@
                     Import
                 </button>
                 <input id="menu-input-import" type="file" accept=".json" style="display: none;" />
+                <br>
                 <label for="menu-select-due-display">Display due dates in list: </label>
                 <select id="menu-select-due-display">
                     <option value="none" selected>None</option>
                     <option value="dates">Dates</option>
                     <option value="badges">Badges</option>
                     <option value="colours">Colours</option>
-                </select>
+                </select><br>
+                <input id="menu-highlight-active-children" type="checkbox" title="Highlight active children" />
+                <label for="menu-highlight-active-children">Highlight children of active task</label>
             </span>
         </header>
         <!--<nav style="display: none;">

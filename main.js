@@ -107,3 +107,7 @@ document.getElementById("menu-input-import").addEventListener("change", async (e
 document.getElementById("menu-button-import").addEventListener("click", () => {
     document.getElementById("menu-input-import").click();
 });
+
+document.querySelector("#menu-highlight-active-children").addEventListener("change", (e) => {
+    document.querySelector("#panel-task-list").classList.toggle("highlight-active-children");
+});

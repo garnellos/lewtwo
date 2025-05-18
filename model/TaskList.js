@@ -177,6 +177,21 @@ export class TaskList
     }
 
     /**
+     * Recursively sets the "related" data attribute for the provided element and its children.
+     *
+     * @param {Object} t - The target element object. Should include a `domElement` property referencing a
+     * DOM element and a `children` iterable of child elements.
+     * @param {string} v - The value to set for the "data-related" attribute.
+     * @return {void} This method does not return a value.
+     */
+    static #recSetRelated(t, v) {
+        t.domElement.dataset.related = v;
+        for (let c of t.children) {
+            this.#recSetRelated(c, v);
+        }
+    }
+
+    /**
      * Sets the specified Task object as the active task and updates its visual representation
      * and the detail view accordingly.
      *
@@ -194,9 +209,14 @@ export class TaskList
             return;
         }
 
-        if (this.activeTask) this.activeTask.domElement.dataset.selected = "false";
+        if (this.activeTask) {
+            this.activeTask.domElement.dataset.selected = "false";
+            TaskList.#recSetRelated(this.activeTask, "false");
+        }
         this.activeTask = t;
         t.domElement.dataset.selected = "true";
+
+        TaskList.#recSetRelated(t, "true");
 
         TaskDetailPanel.renderDetails(t);
     }
@@ -212,7 +232,10 @@ export class TaskList
             return;
         }
 
-        if (this.activeTask) this.activeTask.domElement.dataset.selected = "false";
+        if (this.activeTask) {
+            this.activeTask.domElement.dataset.selected = "false";
+            TaskList.#recSetRelated(this.activeTask, "false");
+        }
         this.activeTask = null;
 
         TaskDetailPanel.renderDetails(null);
