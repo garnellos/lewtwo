@@ -38,6 +38,13 @@ document.querySelector("#menu-toggle").addEventListener("click", () => {
         (document.querySelector("#menu").style.display === "none" ? "inline-block" : "none");
 });
 
+document.querySelector("#menu-button-collapse-all").addEventListener("click", () => {
+    for (let t of TaskListPanel.foldMap.keys()) {
+        TaskListPanel.foldMap.set(t, true);
+    }
+    TaskListPanel.render(window.liveTaskList);
+});
+
 document.querySelector("#menu-button-expand-all").addEventListener("click", () => {
     TaskListPanel.foldMap = new Map([]);
     TaskListPanel.render(window.liveTaskList);
