@@ -48,9 +48,10 @@ export const TaskDate = {
         const today  = TaskDate.toDateOnly(new Date());
         const target = TaskDate.toDateOnly(date);
 
-        if (target < today) return -1;
+        return Math.round((target.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+        /*if (target < today) return -1;
         if (target > today) return 1;
-        return 0;
+        return 0;*/
     },
 
     getColour: (date) => {
@@ -74,6 +75,13 @@ export const TaskDate = {
             badge.textContent = "due today";
             badge.style.backgroundColor = "gold";
             badge.style.border = "thin solid darkgoldenrod";
+            badge.style.color = "black";
+            return badge;
+        } else if (ts >= 1 && ts <= 7) {
+            if (ts === 1) { badge.textContent = "due tomorrow"; }
+            else { badge.textContent = "due in " + ts + " days"; }
+            badge.style.backgroundColor = "lightgreen";
+            badge.style.border = "thin solid darkgreen";
             badge.style.color = "black";
             return badge;
         }
