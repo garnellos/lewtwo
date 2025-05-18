@@ -117,10 +117,16 @@ export const TaskDetailPanel = {
                 console.error("task title must not be empty");
             }
 
-            // save description and due date
+            // save description
             task.description = document.querySelector("#edit-task-description").value;
-            task.dueDate =
-                new Date(TaskDate.formatDateValue(document.querySelector("#edit-task-due-date").value));
+
+            // determine if due date was set and save value
+            if (document.querySelector("#edit-task-due-date").value !== "") {
+                task.dueDate =
+                    new Date(TaskDate.formatDateValue(document.querySelector("#edit-task-due-date").value));
+            } else {
+                task.dueDate = null;
+            }
 
             // unlock focus
             window.liveTaskList.lockFocus = false;
