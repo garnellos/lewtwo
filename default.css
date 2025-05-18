@@ -69,6 +69,8 @@ div#panel-task-list .due-date-badge {
     padding: .1em .5em;
     border-radius: 1em;
     margin-left: .5em;
+    position: relative;
+    top: -.1em;
 }
 
 /** TASK DETAIL / EDIT VIEW **/
