@@ -20,7 +20,7 @@ window.logic.ui.TaskDetailPanel = TaskDetailPanel;
 
 // load TaskList
 Database.loadTaskList().then((data) => {
-    TaskListPanel.render(TaskList.deserialise(data));
+    TaskListPanel.render(data? TaskList.deserialise(data) : new TaskList());
     console.log("Task list loaded successfully.");
     return data;
 });
@@ -62,7 +62,7 @@ document.querySelector("#menu-button-save").addEventListener("click", () => {
     });
 });
 
-// Exportiere die aktuelle Task-Liste als JSON
+// export current list to JSON file
 function exportTaskList() {
     const serialised = window.liveTaskList.serialise();
     const blob = new Blob([JSON.stringify(serialised, null, 2)], { type: "application/json" });
@@ -80,7 +80,7 @@ function exportTaskList() {
 }
 document.getElementById("menu-button-export").addEventListener("click", exportTaskList);
 
-// Erzeuge unsichtbares Input für Datei-Upload (nur einmal anlegen)
+// create invisible input for file upload
 document.getElementById("menu-input-import").addEventListener("change", async (event) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -93,10 +93,10 @@ document.getElementById("menu-input-import").addEventListener("change", async (e
     } catch (e) {
         alert("Error importing task list! " + e.message);
     }
-    document.getElementById("menu-input-import").value = ""; // Reset für den nächsten Upload
+    document.getElementById("menu-input-import").value = ""; // reset for next upload
 });
 
-// Aktiviere und verbinde den "Import"-Button
+// assign import button
 document.getElementById("menu-button-import").addEventListener("click", () => {
     document.getElementById("menu-input-import").click();
 });

@@ -248,6 +248,7 @@ export class TaskList
         for (let [key, value] of data.settings) {
             tl.settings.set(key, value);
         }
+
         return tl;
     }
 }

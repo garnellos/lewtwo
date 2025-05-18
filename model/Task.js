@@ -160,8 +160,10 @@ export class Task
             data.dueDate,
             data.done
         );
-        for (let c of data.children) {
-            t.addChild(Task.deserialise(c, p));
+        if (data.children) {
+            for (let c of data.children) {
+                t.addChild(Task.deserialise(c, p));
+            }
         }
         return t;
     }

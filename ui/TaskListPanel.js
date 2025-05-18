@@ -103,15 +103,15 @@ export const TaskListPanel = {
                         let spanDueDate = document.createElement("span");
                         spanDueDate.classList.add("task-small-due-date");
                         spanDueDate.textContent = TaskDate.formatDateDisplay(t.dueDate);
-                        spanDueDate.style.color = TaskDate.getColour(t.dueDate);
+                        spanDueDate.style.color = (t.done? "darkgray" : TaskDate.getColour(t.dueDate));
                         li.appendChild(spanDueDate);
                         break;
                     case "badges":
                         let spanBadge = TaskDate.getBadge(t.dueDate);
-                        if (spanBadge) li.appendChild(spanBadge);
+                        if (spanBadge && !t.done) li.appendChild(spanBadge);
                         break;
                     case "colours":
-                        span.style.color = TaskDate.getColour(t.dueDate);
+                        span.style.color = (t.done? "darkgray" : TaskDate.getColour(t.dueDate));
                         break;
                     default:
                         console.error("invalid due-display setting");
