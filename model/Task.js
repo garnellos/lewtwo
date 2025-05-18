@@ -142,10 +142,10 @@ export class Task
             title: this.title,
             description: this.description,
             parent: this.parent?.uuid,
-            children: children,
             creationDate: this.creationDate,
             dueDate: this.dueDate,
-            done: this.done
+            done: this.done,
+            children: children
         };
     }
 

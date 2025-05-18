@@ -226,7 +226,6 @@ export class TaskList
         }
         let settings = [];
         this.settings.forEach((value, key) => {
-            console.log(key + " : " + value);
             settings.push([key, value]);
         });
         return {
