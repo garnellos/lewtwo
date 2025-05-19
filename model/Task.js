@@ -152,12 +152,13 @@ export class Task
     static deserialise(data, p = null)
     {
         if (!data) return;
+        let nDueDate = (data.dueDate? new Date(data.dueDate) : null);
         let t = new Task(
             data.title,
             data.description,
             p,
             data.creationDate,
-            data.dueDate,
+            nDueDate,
             data.done
         );
         if (data.children) {
