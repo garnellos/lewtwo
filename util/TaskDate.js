@@ -63,26 +63,20 @@ export const TaskDate = {
 
     getBadge: (date) => {
         let badge = document.createElement("span");
-        badge.classList.add("due-date-badge");
+        badge.classList.add("due-date-badge", "badge", "rounded-pill");
         const ts = TaskDate.compareToToday(date);
         if (ts < 0) {
             badge.innerHTML = "overdue";
-            badge.style.backgroundColor = "red";
-            badge.style.border = "thin solid darkred";
-            badge.style.color = "white";
+            badge.classList.add("text-bg-danger");
             return badge;
         } else if (ts === 0) {
             badge.innerHTML = "due&nbsp;today";
-            badge.style.backgroundColor = "gold";
-            badge.style.border = "thin solid darkgoldenrod";
-            badge.style.color = "black";
+            badge.classList.add("text-bg-warning");
             return badge;
         } else if (ts >= 1 && ts <= 7) {
             if (ts === 1) { badge.innerHTML = "due&nbsp;tomorrow"; }
             else { badge.innerHTML = "due&nbsp;in&nbsp;" + ts + "&nbsp;days"; }
-            badge.style.backgroundColor = "lightgreen";
-            badge.style.border = "thin solid darkgreen";
-            badge.style.color = "black";
+            badge.classList.add("text-bg-success");
             return badge;
         }
     }
