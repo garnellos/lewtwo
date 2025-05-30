@@ -12,9 +12,9 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     </head>
     <body>
-        <header>
+        <header class="p-1">
             <div>
-                <div class="m-2">
+                <div class="m-1">
                     <b>Lightweight task and work organiser</b> <small>v0.1.1-alpha</small>
                 </div>
                 <div class="btn-toolbar p-1" role="toolbar" style="display: inline-flex;">
@@ -131,13 +131,13 @@
         <!--<nav style="display: none;">
             <i>Navigation view</i>
         </nav>-->
-        <main>
+        <main class="p-1">
             <div id="panel-task-list">
                 <ul>
                 </ul>
             </div>
         </main>
-        <aside>
+        <aside class="p-1">
             <div id="panel-no-task-selected">
                 <b>No task selected.</b> Please select any task to show details.
             </div>
@@ -148,33 +148,35 @@
                 </div>
                 <div id="active-task-due-date-wrapper">
                     due by
-                    <span id="active-task-due-date">05.05.2025 17:00</span>
+                    <span id="active-task-due-date">##.##.#### ##:##</span>
                 </div>
                 <div id="active-task-description">Long Description.</div>
                 <hr />
-                <div id="active-task-button-wrapper">
-                    <button id="active-task-button-edit">Edit</button>
-                    <button id="active-task-button-add-child">Add child</button>
-                    <button id="active-task-button-add-sibling" disabled>Add sibling</button>
-                    <button id="active-task-button-remove">Remove</button>
+                <div id="active-task-button-wrapper" style="line-height: 2em;">
+                    <button id="active-task-button-edit" class="btn btn-sm btn-outline-primary">Edit</button>
+                    <button id="active-task-button-move" class="btn btn-sm btn-outline-secondary disabled">Move</button>
+                    <button id="active-task-button-add-child" class="btn btn-sm btn-outline-primary">Add child</button>
+                    <button id="active-task-button-add-sibling" class="btn btn-sm btn-outline-secondary disabled">Add sibling</button>
+                    <button id="active-task-button-remove" class="btn btn-sm btn-outline-danger">Remove</button>
                 </div>
                 <div id="active-task-creation-date-wrapper">
-                    created on <span id="active-task-creation-date">04.05.2025 17:45</span>
+                    created on <span id="active-task-creation-date">##.##.#### ##:##</span>
                 </div>
                 <div id="active-task-uuid">########-####-####-####-########</div>
             </div>
             <div id="panel-task-edit" style="display: none;">
                 <label for="edit-task-title" style="display: none">Title</label>
-                <input id="edit-task-title" type="text" placeholder="Title" />
+                <input id="edit-task-title" class="form-control form-control-lg" type="text" placeholder="Title" />
                 <label for="edit-task-description" style="display: none">Description</label>
-                <textarea id="edit-task-description" placeholder="description"></textarea>
-                <div id="edit-task-due-date-wrapper">
-                    <label for="edit-task-due-date">due by</label> <input id="edit-task-due-date" type="date" />
+                <textarea id="edit-task-description" class="form-control" placeholder="description"></textarea>
+                <div id="edit-task-due-date-wrapper" class="d-flex justify-content-between">
+                    <label for="edit-task-due-date" style="margin-right: .5em; padding-top: .15em;">due&nbsp;by</label>
+                    <input id="edit-task-due-date" class="form-control form-control-sm" type="date" />
                 </div>
                 <hr />
                 <div id="edit-task-button-wrapper">
-                    <input id="edit-task-button-save" type="button" value="Save" />
-                    <input id="edit-task-button-cancel" type="button" value="Cancel" />
+                    <button id="edit-task-button-save" class="btn btn-sm btn-primary" type="button">Save</button>
+                    <button id="edit-task-button-cancel" class="btn btn-sm btn-outline-danger" type="button">Cancel</button>
                 </div>
                 <div id="edit-task-uuid">########-####-####-####-########</div>
             </div>

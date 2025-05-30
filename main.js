@@ -46,22 +46,22 @@ document.querySelector("#menu-item-expand-all").addEventListener("click", () => 
 });
 
 // event handling for "show due dates in list" settings
-document.querySelector("#settings-item-show-due-dates-none").addEventListener("click", (e) => {
+document.querySelector("#settings-item-show-due-dates-none").addEventListener("click", () => {
     window.liveTaskList.settings.set("due-display", "none");
     TaskListPanel.render(window.liveTaskList);
 });
 
-document.querySelector("#settings-item-show-due-dates-dates").addEventListener("click", (e) => {
+document.querySelector("#settings-item-show-due-dates-dates").addEventListener("click", () => {
     window.liveTaskList.settings.set("due-display", "dates");
     TaskListPanel.render(window.liveTaskList);
 });
 
-document.querySelector("#settings-item-show-due-dates-badges").addEventListener("click", (e) => {
+document.querySelector("#settings-item-show-due-dates-badges").addEventListener("click", () => {
     window.liveTaskList.settings.set("due-display", "badges");
     TaskListPanel.render(window.liveTaskList);
 });
 
-document.querySelector("#settings-item-show-due-dates-colours").addEventListener("click", (e) => {
+document.querySelector("#settings-item-show-due-dates-colours").addEventListener("click", () => {
     window.liveTaskList.settings.set("due-display", "colours");
     TaskListPanel.render(window.liveTaskList);
 });

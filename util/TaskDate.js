@@ -66,20 +66,20 @@ export const TaskDate = {
         badge.classList.add("due-date-badge");
         const ts = TaskDate.compareToToday(date);
         if (ts < 0) {
-            badge.textContent = "overdue";
+            badge.innerHTML = "overdue";
             badge.style.backgroundColor = "red";
             badge.style.border = "thin solid darkred";
             badge.style.color = "white";
             return badge;
         } else if (ts === 0) {
-            badge.textContent = "due today";
+            badge.innerHTML = "due&nbsp;today";
             badge.style.backgroundColor = "gold";
             badge.style.border = "thin solid darkgoldenrod";
             badge.style.color = "black";
             return badge;
         } else if (ts >= 1 && ts <= 7) {
-            if (ts === 1) { badge.textContent = "due tomorrow"; }
-            else { badge.textContent = "due in " + ts + " days"; }
+            if (ts === 1) { badge.innerHTML = "due&nbsp;tomorrow"; }
+            else { badge.innerHTML = "due&nbsp;in&nbsp;" + ts + "&nbsp;days"; }
             badge.style.backgroundColor = "lightgreen";
             badge.style.border = "thin solid darkgreen";
             badge.style.color = "black";

@@ -182,6 +182,7 @@ export const TaskListPanel = {
                 input.setAttribute("id", "new-task-name");
                 input.setAttribute("type", "text");
                 input.setAttribute("placeholder", "New task...");
+                input.style.maxWidth = "40em";
                 input.addEventListener("keypress", function(event) {
                     if (event.key === "Enter") {
                         event.preventDefault();
