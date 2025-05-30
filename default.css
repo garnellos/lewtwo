@@ -41,7 +41,7 @@ div#panel-task-list .task-handle {
 div#panel-task-list .task-handle-fold {
     display: inline-block;
     cursor: pointer;
-    min-width: 1em;
+    min-width: 1.25em;
 }
 
 div#panel-task-list .task-handle[data-selected="true"] {
