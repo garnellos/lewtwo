@@ -12,66 +12,82 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     </head>
     <body>
-        <header>
-            <b>Lightweight task and work organizer</b> v0.1.1-alpha<br/>
-            <div id="menu-dropdown" style="display: inline-block;">
-                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="menu-dropdown-button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                    Menu
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="menu-dropdown-button">
-                    <li>
-                        <a id="menu-item-expand-all" class="dropdown-item" href="#"
-                           title="Show all tasks and subtasks">
-                            Expand all
-                        </a>
-                    </li>
-                    <li>
-                        <a id="menu-item-collapse-all" class="dropdown-item" href="#"
-                           title="Show only top-level tasks, collapse all subtasks">
-                            Collapse all
-                        </a>
-                    </li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                        <a id="menu-item-save" class="dropdown-item" href="#"
-                           title="Manually save task list to browser storage">
-                            Save
-                        </a>
-                    </li>
-                    <li>
-                        <a id="menu-item-load" class="dropdown-item" href="#"
-                           title="Manually load task list from browser storage">
-                            Load
-                        </a>
-                    </li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                        <a id="menu-item-export" class="dropdown-item" href="#"
-                           title="Export task list to a JSON file">
-                            Export
-                        </a>
-                    </li>
-                    <li>
-                        <a id="menu-item-import" class="dropdown-item" href="#"
-                           title="Import a task list from a JSON file">
-                            Import
-                        </a>
-                    </li>
-                </ul>
-                <input id="menu-input-import" type="file" accept=".json" style="display: none;" />
+        <header class="container-fluid p-1">
+            <div class="row p-1">
+                <div class="col">
+                    <b>Lightweight task and work organiser</b> <small>v0.1.1-alpha</small>
+                </div>
             </div>
-            <span id="menu-2">
-                <label for="menu-select-due-display">Display due dates in list: </label>
-                <select id="menu-select-due-display">
-                    <option value="none" selected>None</option>
-                    <option value="dates">Dates</option>
-                    <option value="badges">Badges</option>
-                    <option value="colours">Colours</option>
-                </select><br>
-                <input id="menu-highlight-active-children" type="checkbox" title="Highlight active children" />
-                <label for="menu-highlight-active-children">Highlight children of active task</label>
-            </span>
+            <div class="row p-1">
+                <div class="col-md-auto">
+                    <div id="menu-dropdown" style="display: inline-block;">
+                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="menu-dropdown-button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            Menu
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="menu-dropdown-button">
+                            <li>
+                                <a id="menu-item-expand-all" class="dropdown-item" href="#"
+                                   title="Show all tasks and subtasks">
+                                    Expand all
+                                </a>
+                            </li>
+                            <li>
+                                <a id="menu-item-collapse-all" class="dropdown-item" href="#"
+                                   title="Show only top-level tasks, collapse all subtasks">
+                                    Collapse all
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a id="menu-item-save" class="dropdown-item" href="#"
+                                   title="Manually save task list to browser storage">
+                                    Save
+                                </a>
+                            </li>
+                            <li>
+                                <a id="menu-item-load" class="dropdown-item" href="#"
+                                   title="Manually load task list from browser storage">
+                                    Load
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a id="menu-item-export" class="dropdown-item" href="#"
+                                   title="Export task list to a JSON file">
+                                    Export
+                                </a>
+                            </li>
+                            <li>
+                                <a id="menu-item-import" class="dropdown-item" href="#"
+                                   title="Import a task list from a JSON file">
+                                    Import
+                                </a>
+                            </li>
+                        </ul>
+                        <input id="menu-input-import" type="file" accept=".json" style="display: none;" />
+                    </div>
+                </div>
+                <div class="col-md-auto container">
+                    <div class="row">
+                        <div class="col-md-auto">
+                            <label for="menu-select-due-display">Display due dates in list: </label>
+                        </div>
+                        <div class="col">
+                            <select id="menu-select-due-display" class="form-select form-select-sm">
+                                <option value="none" selected>None</option>
+                                <option value="dates">Dates</option>
+                                <option value="badges">Badges</option>
+                                <option value="colours">Colours</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-auto">
+                    <input id="menu-highlight-active-children" type="checkbox" title="Highlight active children" />
+                    <label for="menu-highlight-active-children">Highlight children of active task</label>
+                </div>
+            </div>
         </header>
         <!--<nav style="display: none;">
             <i>Navigation view</i>
