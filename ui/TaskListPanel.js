@@ -6,14 +6,14 @@ import { TaskDate } from "../util/TaskDate.js";
 export const TaskListPanel = {
 
     /*
-     * character representing the icon for unfolding a task list item
+     * html representing the icon for unfolding a task list item
      */
-    foldShow: "\u2b9e",
+    foldShow: "<i class=\"bi bi-caret-right-fill\"></i>",
 
     /*
-     * character representing the icon for folding a task list item
+     * html representing the icon for folding a task list item
      */
-    foldHide: "\u2b9f",
+    foldHide: "<i class=\"bi bi-caret-down\"></i>",
 
     foldMap: new Map([]),
 
@@ -54,7 +54,7 @@ export const TaskListPanel = {
                     TaskListPanel.foldMap.set(t.uuid, false); // unfolded by default
                 }
                 // set fold icon depending on fold state
-                fold.textContent = TaskListPanel.foldMap.get(t.uuid) ? TaskListPanel.foldShow : TaskListPanel.foldHide;
+                fold.innerHTML = TaskListPanel.foldMap.get(t.uuid) ? TaskListPanel.foldShow : TaskListPanel.foldHide;
             }
 
             fold.addEventListener("click", function() {
@@ -62,8 +62,8 @@ export const TaskListPanel = {
 
                 refUl.style.display = (refUl.style.display === "none" ? "block" : "none");
                 // noinspection EqualityComparisonWithCoercionJS
-                fold.textContent =
-                    (fold.textContent == TaskListPanel.foldHide ? TaskListPanel.foldShow : TaskListPanel.foldHide);
+                fold.innerHTML =
+                    (fold.innerHTML == TaskListPanel.foldHide ? TaskListPanel.foldShow : TaskListPanel.foldHide);
                 TaskListPanel.foldMap.set(t.uuid, (refUl.style.display === "none"));
             })
             li.appendChild(fold);
@@ -144,6 +144,12 @@ export const TaskListPanel = {
         // add buttons for adding additional tasks...
         ul.appendChild((() => {
             let li = document.createElement("li");
+            let div = document.createElement("div");
+
+            // make div a bootstrap input group
+            div.classList.add("input-group", "input-group-sm");
+
+            div.id = "new-task-group";
 
             /**
              * Handles the creation of a new task and updates the task list.
@@ -170,11 +176,13 @@ export const TaskListPanel = {
                 tl.focus(n);
             }
 
-            li.appendChild((() => {
+            div.appendChild((() => {
                 let input = document.createElement("input");
+                input.classList.add("form-control");
                 input.setAttribute("id", "new-task-name");
                 input.setAttribute("type", "text");
                 input.setAttribute("placeholder", "New task...");
+                input.style.maxWidth = "40em";
                 input.addEventListener("keypress", function(event) {
                     if (event.key === "Enter") {
                         event.preventDefault();
@@ -184,13 +192,17 @@ export const TaskListPanel = {
                 });
                 return input;
             })());
-            li.appendChild((() => {
+            div.appendChild((() => {
                 let input = document.createElement("button");
+                input.classList.add("btn", "btn-outline-primary");
+                input.setAttribute("type", "button");
                 input.setAttribute("id", "new-create");
                 input.textContent = "OK";
                 input.addEventListener("click", handler);
                 return input;
             })());
+
+            li.appendChild(div);
             return li;
         })());
 
