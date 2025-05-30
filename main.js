@@ -33,48 +33,48 @@ document.querySelector("main").addEventListener("click", (e) => {
     // if not: don't unfocus
 });
 
-document.querySelector("#menu-item-collapse-all").addEventListener("click", () => {
+document.querySelector("#menu-view-item-collapse-all").addEventListener("click", () => {
     for (let t of TaskListPanel.foldMap.keys()) {
         TaskListPanel.foldMap.set(t, true);
     }
     TaskListPanel.render(window.liveTaskList);
 });
 
-document.querySelector("#menu-item-expand-all").addEventListener("click", () => {
+document.querySelector("#menu-view-item-expand-all").addEventListener("click", () => {
     TaskListPanel.foldMap = new Map([]);
     TaskListPanel.render(window.liveTaskList);
 });
 
 // event handling for "show due dates in list" settings
-document.querySelector("#settings-item-show-due-dates-none").addEventListener("click", () => {
+document.querySelector("#menu-view-item-show-due-dates-none").addEventListener("click", () => {
     window.liveTaskList.settings.set("due-display", "none");
     TaskListPanel.render(window.liveTaskList);
 });
 
-document.querySelector("#settings-item-show-due-dates-dates").addEventListener("click", () => {
+document.querySelector("#menu-view-item-show-due-dates-dates").addEventListener("click", () => {
     window.liveTaskList.settings.set("due-display", "dates");
     TaskListPanel.render(window.liveTaskList);
 });
 
-document.querySelector("#settings-item-show-due-dates-badges").addEventListener("click", () => {
+document.querySelector("#menu-view-item-show-due-dates-badges").addEventListener("click", () => {
     window.liveTaskList.settings.set("due-display", "badges");
     TaskListPanel.render(window.liveTaskList);
 });
 
-document.querySelector("#settings-item-show-due-dates-colours").addEventListener("click", () => {
+document.querySelector("#menu-view-item-show-due-dates-colours").addEventListener("click", () => {
     window.liveTaskList.settings.set("due-display", "colours");
     TaskListPanel.render(window.liveTaskList);
 });
 
 
-document.querySelector("#menu-item-load").addEventListener("click", () => {
+document.querySelector("#menu-file-item-load").addEventListener("click", () => {
     Database.loadTaskList().then((data) => {
         TaskListPanel.render(TaskList.deserialise(data));
         console.log("Task list loaded successfully.");
     })
 });
 
-document.querySelector("#menu-item-save").addEventListener("click", () => {
+document.querySelector("#menu-file-item-save").addEventListener("click", () => {
     Database.saveTaskList().then(() => {
         console.log("Task list saved successfully.");
     });
@@ -96,7 +96,7 @@ function exportTaskList() {
         URL.revokeObjectURL(url);
     }, 0);
 }
-document.getElementById("menu-item-export").addEventListener("click", exportTaskList);
+document.getElementById("menu-file-item-export").addEventListener("click", exportTaskList);
 
 // create invisible input for file upload
 document.getElementById("menu-input-import").addEventListener("change", async (event) => {
@@ -115,11 +115,11 @@ document.getElementById("menu-input-import").addEventListener("change", async (e
 });
 
 // assign import button
-document.getElementById("menu-item-import").addEventListener("click", () => {
+document.getElementById("menu-file-item-import").addEventListener("click", () => {
     document.getElementById("menu-input-import").click();
 });
 
-document.querySelector("#settings-item-highlight-active-children").addEventListener("click", (e) => {
+document.querySelector("#menu-view-item-highlight-active-children").addEventListener("click", (e) => {
     document.querySelector("#panel-task-list").classList.toggle("highlight-active-children");
     e.currentTarget.classList.toggle("active");
 });
