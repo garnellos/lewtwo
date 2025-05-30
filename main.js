@@ -88,7 +88,7 @@ function exportTaskList() {
 
     const a = document.createElement('a');
     a.href = url;
-    a.download = "lewtwo_tasks.json";
+    a.download = "litwo_tasks.json";
     document.body.appendChild(a);
     a.click();
     setTimeout(() => {

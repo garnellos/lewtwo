@@ -1,5 +1,5 @@
 /**
- * Represents a task as a core piece of logic in the lewtwo app.
+ * Represents a task as a core piece of logic in the litwo app.
  */
 export class Task
 {

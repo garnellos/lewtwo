@@ -1,7 +1,7 @@
 import { TaskList } from "../model/TaskList.js";
 
 export const Database = {
-    dbName: "lewtwo",
+    dbName: "litwo",
     dbVersion: 1,
     dbStoreName: "TaskList",
 
