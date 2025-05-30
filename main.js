@@ -33,19 +33,14 @@ document.querySelector("main").addEventListener("click", (e) => {
     // if not: don't unfocus
 });
 
-document.querySelector("#menu-toggle").addEventListener("click", () => {
-    document.querySelector("#menu").style.display =
-        (document.querySelector("#menu").style.display === "none" ? "inline-block" : "none");
-});
-
-document.querySelector("#menu-button-collapse-all").addEventListener("click", () => {
+document.querySelector("#menu-item-collapse-all").addEventListener("click", () => {
     for (let t of TaskListPanel.foldMap.keys()) {
         TaskListPanel.foldMap.set(t, true);
     }
     TaskListPanel.render(window.liveTaskList);
 });
 
-document.querySelector("#menu-button-expand-all").addEventListener("click", () => {
+document.querySelector("#menu-item-expand-all").addEventListener("click", () => {
     TaskListPanel.foldMap = new Map([]);
     TaskListPanel.render(window.liveTaskList);
 });
@@ -56,14 +51,14 @@ document.querySelector("#menu-select-due-display").addEventListener("change",
     TaskListPanel.render(window.liveTaskList);
 });
 
-document.querySelector("#menu-button-load").addEventListener("click", () => {
+document.querySelector("#menu-item-load").addEventListener("click", () => {
     Database.loadTaskList().then((data) => {
         TaskListPanel.render(TaskList.deserialise(data));
         console.log("Task list loaded successfully.");
     })
 });
 
-document.querySelector("#menu-button-save").addEventListener("click", () => {
+document.querySelector("#menu-item-save").addEventListener("click", () => {
     Database.saveTaskList().then(() => {
         console.log("Task list saved successfully.");
     });
@@ -85,7 +80,7 @@ function exportTaskList() {
         URL.revokeObjectURL(url);
     }, 0);
 }
-document.getElementById("menu-button-export").addEventListener("click", exportTaskList);
+document.getElementById("menu-item-export").addEventListener("click", exportTaskList);
 
 // create invisible input for file upload
 document.getElementById("menu-input-import").addEventListener("change", async (event) => {
@@ -104,7 +99,7 @@ document.getElementById("menu-input-import").addEventListener("change", async (e
 });
 
 // assign import button
-document.getElementById("menu-button-import").addEventListener("click", () => {
+document.getElementById("menu-item-import").addEventListener("click", () => {
     document.getElementById("menu-input-import").click();
 });
 
