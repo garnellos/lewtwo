@@ -45,11 +45,27 @@ document.querySelector("#menu-item-expand-all").addEventListener("click", () => 
     TaskListPanel.render(window.liveTaskList);
 });
 
-document.querySelector("#menu-select-due-display").addEventListener("change",
-    (e) => {
-    window.liveTaskList.settings.set("due-display", e.target.value);
+// event handling for "show due dates in list" settings
+document.querySelector("#settings-item-show-due-dates-none").addEventListener("click", (e) => {
+    window.liveTaskList.settings.set("due-display", "none");
     TaskListPanel.render(window.liveTaskList);
 });
+
+document.querySelector("#settings-item-show-due-dates-dates").addEventListener("click", (e) => {
+    window.liveTaskList.settings.set("due-display", "dates");
+    TaskListPanel.render(window.liveTaskList);
+});
+
+document.querySelector("#settings-item-show-due-dates-badges").addEventListener("click", (e) => {
+    window.liveTaskList.settings.set("due-display", "badges");
+    TaskListPanel.render(window.liveTaskList);
+});
+
+document.querySelector("#settings-item-show-due-dates-colours").addEventListener("click", (e) => {
+    window.liveTaskList.settings.set("due-display", "colours");
+    TaskListPanel.render(window.liveTaskList);
+});
+
 
 document.querySelector("#menu-item-load").addEventListener("click", () => {
     Database.loadTaskList().then((data) => {
@@ -103,6 +119,7 @@ document.getElementById("menu-item-import").addEventListener("click", () => {
     document.getElementById("menu-input-import").click();
 });
 
-document.querySelector("#menu-highlight-active-children").addEventListener("change", (e) => {
+document.querySelector("#settings-item-highlight-active-children").addEventListener("click", (e) => {
     document.querySelector("#panel-task-list").classList.toggle("highlight-active-children");
+    e.currentTarget.classList.toggle("active");
 });

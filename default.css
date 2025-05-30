@@ -54,8 +54,8 @@ div#panel-task-list .task-handle[data-done="true"] {
     color: gray;
 }
 
-div#panel-task-list #new-task-name {
-    margin-right: .5em;
+div#panel-task-list #new-task-group {
+    margin-top: .5em;
 }
 
 div#panel-task-list .task-small-due-date {

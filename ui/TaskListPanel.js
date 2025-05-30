@@ -144,6 +144,12 @@ export const TaskListPanel = {
         // add buttons for adding additional tasks...
         ul.appendChild((() => {
             let li = document.createElement("li");
+            let div = document.createElement("div");
+
+            // make div a bootstrap input group
+            div.classList.add("input-group", "input-group-sm");
+
+            div.id = "new-task-group";
 
             /**
              * Handles the creation of a new task and updates the task list.
@@ -170,8 +176,9 @@ export const TaskListPanel = {
                 tl.focus(n);
             }
 
-            li.appendChild((() => {
+            div.appendChild((() => {
                 let input = document.createElement("input");
+                input.classList.add("form-control");
                 input.setAttribute("id", "new-task-name");
                 input.setAttribute("type", "text");
                 input.setAttribute("placeholder", "New task...");
@@ -184,13 +191,17 @@ export const TaskListPanel = {
                 });
                 return input;
             })());
-            li.appendChild((() => {
+            div.appendChild((() => {
                 let input = document.createElement("button");
+                input.classList.add("btn", "btn-outline-primary");
+                input.setAttribute("type", "button");
                 input.setAttribute("id", "new-create");
                 input.textContent = "OK";
                 input.addEventListener("click", handler);
                 return input;
             })());
+
+            li.appendChild(div);
             return li;
         })());
 
