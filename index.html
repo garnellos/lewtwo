@@ -14,12 +14,12 @@
     <body>
         <header>
             <div>
-                <div class="p-1">
+                <div class="m-2">
                     <b>Lightweight task and work organiser</b> <small>v0.1.1-alpha</small>
                 </div>
-                <div class="btn-toolbar p-1" role="toolbar">
-                    <div class="btn-group btn-group-sm" role="group" style="display: inline-flex;">
-                        <div id="menu-dropdown" class="btn-group btn-group-sm" role="group">
+                <div class="btn-toolbar p-1" role="toolbar" style="display: inline-flex;">
+                    <div class="btn-group m-1" role="group">
+                        <div id="menu-dropdown" class="btn-group" role="group">
                             <button class="btn btn-outline-primary dropdown-toggle" type="button"
                                     id="menu-dropdown-button" data-bs-toggle="dropdown" aria-expanded="false">
                                 File
@@ -53,7 +53,7 @@
                             </ul>
                             <input id="menu-input-import" type="file" accept=".json" style="display: none;" />
                         </div>
-                        <div id="settings-dropdown" class="btn-group btn-group-sm" role="group">
+                        <div id="settings-dropdown" class="btn-group" role="group">
                             <button class="btn btn-outline-primary dropdown-toggle" type="button"
                                     id="settings-dropdown-button" data-bs-toggle="dropdown" aria-expanded="false">
                                 View
@@ -110,6 +110,20 @@
                                 </li>
                             </ul>
                         </div>
+                    </div>
+                    <div class="btn-group m-1" role="group">
+                        <button id="button-add-task" class="btn btn-outline-primary active" type="button">
+                            <i class="bi bi-list-check"></i>
+                            List
+                        </button>
+                        <button id="view-switch-calendar" class="btn btn-outline-primary disabled" type="button">
+                            <i class="bi bi-calendar3"></i>
+                            Calendar
+                        </button>
+                        <button id="view-switch-map" class="btn btn-outline-primary disabled" type="button">
+                            <i class="bi bi-diagram-2"></i>
+                            Map
+                        </button>
                     </div>
                 </div>
             </div>
