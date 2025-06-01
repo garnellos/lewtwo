@@ -4,6 +4,16 @@ import { TaskDetailPanel } from "./TaskDetailPanel.js";
 import { TaskDate } from "../util/TaskDate.js";
 
 export const TaskListPanel = {
+    summon: () => {
+        window.liveMainPanel = TaskListPanel;
+        document.querySelector("#panel-main-view").innerHTML = "Loading TaskListPanel...";
+        document.querySelector("#panel-main-view").className = "panel-task-list";
+
+        document.querySelector("#view-switch-calendar").classList.remove("active");
+        document.querySelector("#view-switch-list").classList.add("active");
+
+        TaskListPanel.render(window.liveTaskList);
+    },
 
     /*
      * html representing the icon for unfolding a task list item
@@ -29,7 +39,7 @@ export const TaskListPanel = {
         }
         
         // select and clear viewport
-        let taskListView = document.querySelector("#panel-task-list");
+        let taskListView = document.querySelector("#panel-main-view");
         taskListView.innerHTML = "";
 
         // select ul

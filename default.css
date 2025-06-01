@@ -27,12 +27,12 @@ header, footer {
 /** TASK LIST **/
 
 /* list of task */
-div#panel-task-list ul {
+div.panel-task-list ul {
     list-style-type: none;
 }
 
 /* individual task name/handle display in list */
-div#panel-task-list .task-handle {
+div.panel-task-list .task-handle {
     border-radius: .25em;
     padding: .1em;
     margin-left: .15em;
@@ -40,33 +40,33 @@ div#panel-task-list .task-handle {
     user-select: none; /* prevent text selection */
 }
 
-div#panel-task-list .task-handle-fold {
+div.panel-task-list .task-handle-fold {
     display: inline-block;
     cursor: pointer;
     min-width: 1.25em;
 }
 
-div#panel-task-list .task-handle[data-selected="true"] {
+div.panel-task-list .task-handle[data-selected="true"] {
     color: white !important;
     background-color: var(--bs-primary);
 }
 
-div#panel-task-list .task-handle[data-done="true"] {
+div.panel-task-list .task-handle[data-done="true"] {
     text-decoration: line-through;
     color: gray;
 }
 
-div#panel-task-list #new-task-group {
+div.panel-task-list #new-task-group {
     margin-top: .5em;
 }
 
-div#panel-task-list .task-small-due-date {
+div.panel-task-list .task-small-due-date {
     margin-left: .5em;
     font-size: 70%;
     color: darkgray;
 }
 
-div#panel-task-list .due-date-badge {
+div.panel-task-list .due-date-badge {
     font-size: 70%;
     margin-left: .5em;
     position: relative;

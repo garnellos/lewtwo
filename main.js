@@ -4,6 +4,7 @@ import { TaskListPanel } from "./ui/TaskListPanel.js";
 import { TaskDetailPanel } from "./ui/TaskDetailPanel.js";
 import { TaskDate } from "./util/TaskDate.js";
 import { Database } from "./util/Database.js";
+import { TaskCalendarPanel } from "./ui/TaskCalendarPanel.js";
 
 // debug assignments that allow use of modules from the console
 window.logic = {
@@ -15,12 +16,14 @@ window.logic.model.Task = Task;
 window.logic.model.TaskList = TaskList;
 window.logic.util.TaskDate = TaskDate;
 window.logic.ui.TaskListPanel = TaskListPanel;
+window.logic.ui.TaskCalendarPanel = TaskCalendarPanel;
 window.logic.ui.TaskDetailPanel = TaskDetailPanel;
 // end debug assignments
 
 // load TaskList
 Database.loadTaskList().then((data) => {
-    TaskListPanel.render(data? TaskList.deserialise(data) : new TaskList());
+    window.liveTaskList = data? TaskList.deserialise(data) : new TaskList();
+    TaskListPanel.summon();
     console.log("Task list loaded successfully.");
     return data;
 });
@@ -122,4 +125,18 @@ document.getElementById("menu-file-item-import").addEventListener("click", () =>
 document.querySelector("#menu-view-item-highlight-active-children").addEventListener("click", (e) => {
     document.querySelector("#panel-task-list").classList.toggle("highlight-active-children");
     e.currentTarget.classList.toggle("active");
+});
+
+document.querySelector("#view-switch-list").addEventListener("click", (e) => {
+    if (e.currentTarget.classList.contains("active"))
+        return;
+    TaskListPanel.summon();
+    TaskListPanel.render(window.liveTaskList);
+});
+
+document.querySelector("#view-switch-calendar").addEventListener("click", (e) => {
+    if (e.currentTarget.classList.contains("active"))
+        return;
+    TaskCalendarPanel.summon();
+    TaskCalendarPanel.render(window.liveTaskList);
 });
